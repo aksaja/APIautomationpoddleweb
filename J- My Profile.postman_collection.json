@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "4ed405d9-b1bf-4699-8aa4-f2c763fcee20",
+		"name": "J: My Profile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26111120",
+		"_collection_link": "https://winter-trinity-851878.postman.co/workspace/Poddle-business-Web-~2bb7aeee-71e2-4cb7-9720-ae5ca1ab3b23/collection/26111120-4ed405d9-b1bf-4699-8aa4-f2c763fcee20?action=share&source=collection_link&creator=26111120"
+	},
+	"item": [
+		{
+			"name": "Vender user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"  pm.expect(body.isError).to.be.false\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"  pm.expect(body.result.firstName).to.be.a('string');\r",
+							"  pm.expect(body.result.lastName).to.be.a('string');\r",
+							"  pm.expect(body.result.email).to.be.a('string');\r",
+							"  pm.expect(body.result.loginType).to.be.a('number');\r",
+							"  pm.expect(body.result.role).to.be.a('string');\r",
+							"  pm.expect(body.result.isActive).to.be.a('boolean').to.be.true;\r",
+							"  pm.expect(body.result.isOnline).to.be.a('boolean').to.be.false;\r",
+							"  pm.expect(body.result.isBusinessBooster).to.be.a('boolean').to.be.true;\r",
+							"   pm.expect(body.result.isNFCTagEnabled).to.be.a('boolean').to.be.true;\r",
+							"  for(var a = 0; a< body.result.length; a++)\r",
+							"  pm.expect(body.result.name).to.be.a('string').to.equals(\"Super User\")\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MDI5MDAsImV4cCI6MTc2NjAzODkwMCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.SS7LeO0j5Z92_CDbnL3AHWaeMBA2stmVyfUEzWpSNGE"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v1.1/VendorUser?userId={{vendor_user_id}}",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v1.1",
+						"VendorUser"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "{{vendor_user_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Business Booster Details Validation ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"No error found\", function(){\r",
+							"    pm.expect(body.isError).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"    pm.expect(body.result.totalPoints).to.be.a('number');\r",
+							"    pm.expect(body.result.shareCount).to.be.a('number');\r",
+							"    pm.expect(body.result.downloadCount).to.be.a('number');\r",
+							"    pm.expect(body.result.followCount).to.be.a('number');\r",
+							"    pm.expect(body.result.downloadPoints).to.be.a('number');\r",
+							"    pm.expect(body.result.followPoints).to.be.a('number');\r",
+							"    pm.expect(body.result.totalCounts).to.be.a('number');\r",
+							"    pm.expect(body.result.nfcTapCount).to.be.a('number');\r",
+							"    pm.expect(body.result.isActive).to.be.a('boolean').to.be.true;\r",
+							"    pm.expect(body.result.isNFCEnabled).to.be.a('boolean').to.be.true\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MzE1MTksImV4cCI6MTc2NjA2NzUxOSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.VmopRNruzd_UQZG6hU66rzvJLGSTaFgMYOQvKJ-7ZT8"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/VendorAgg/DataCapture/getBusinessBoosterDetails?id=d14fc100-c446-4452-8d32-ced80de15656",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"VendorAgg",
+						"DataCapture",
+						"getBusinessBoosterDetails"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "d14fc100-c446-4452-8d32-ced80de15656"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
