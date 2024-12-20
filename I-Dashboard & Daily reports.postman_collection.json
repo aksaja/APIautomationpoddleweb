@@ -1,0 +1,1786 @@
+{
+	"info": {
+		"_postman_id": "3872c387-a4e1-4a94-af73-71570b53aea4",
+		"name": "I:Dashboard & Daily reports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26111120",
+		"_collection_link": "https://winter-trinity-851878.postman.co/workspace/Poddle-business-Web-~2bb7aeee-71e2-4cb7-9720-ae5ca1ab3b23/collection/26111120-3872c387-a4e1-4a94-af73-71570b53aea4?action=share&source=collection_link&creator=26111120"
+	},
+	"item": [
+		{
+			"name": "View and follower count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"    pm.expect(body.isError).to.be.false\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation of follower count\", function(){\r",
+							"    pm.expect(body.result.followerCount).to.be.a('number');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation of view count\",function(){\r",
+							"    pm.expect(body.result.viewCount).to.be.a('number') \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation of accelerate growth unlock status\", function(){\r",
+							"    pm.expect(body.result.isAccelerateGrowth).to.be.true \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation for followers unlock count\", function(){\r",
+							"pm.expect(body.result.followersUnlockCount).to.be.a('Number')\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/j"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MDI5MDAsImV4cCI6MTc2NjAzODkwMCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.SS7LeO0j5Z92_CDbnL3AHWaeMBA2stmVyfUEzWpSNGE"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/log/v1.0/Log/Get-Business-Views?FilterType=0&StartDate=2024-12-02&EndDate=2024-12-18&PeriodType=1&VendorId=349b7842-c4a2-4cb1-abb4-25c48dc88c6e&ChannelId=2fda69d7-ed50-4640-8a2b-7774c015eeb0&FilterSubType=0",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"log",
+						"v1.0",
+						"Log",
+						"Get-Business-Views"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "0"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-12-02"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-12-18"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "VendorId",
+							"value": "349b7842-c4a2-4cb1-abb4-25c48dc88c6e"
+						},
+						{
+							"key": "ChannelId",
+							"value": "2fda69d7-ed50-4640-8a2b-7774c015eeb0"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Business views",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"pm.expect(body.result.totalCount).to.be.a('Number')\r",
+							"pm.expect(body.result.totalFollowCount).to.be.a('Number')\r",
+							"pm.expect(body.result.totalUnfollowCount).to.be.a('Number')\r",
+							"pm.expect(body.result.isDates).to.be.true\r",
+							"pm.expect(body.result.divider).to.be.a('Number')\r",
+							"pm.expect(body.result.date).to.be.string\r",
+							"pm.expect(body.result.total).to.be.string\r",
+							"pm.expect(body.result.current).to.be.string\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiVXNlcklkIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiRmlyc3ROYW1lIjoidGh1cmlnYSIsIkxhc3ROYW1lIjoidGh1cmkiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6IjJmZGE2OWQ3LWVkNTAtNDY0MC04YTJiLTc3NzRjMDE1ZWViMCIsIkNoYW5uZWxUeXBlIjoiR3JvdXAiLCJDaGFubmVsTmFtZSI6InBvZGRsZSIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoidGh1cmlnYTNAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZjM1ZjIwOTItMGU3OS00YzJhLTg3YWMtNDBmNmVmZDI0YjE1IiwiT3JpZ2luTmFtZSI6IlRlZW4gZmFzaGlvbnMiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJkYzlkNjQyOS1iZDMyLTRkNzAtOGEyNy1hNWQ4ZGFjMDA3NWZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCJmMzVmMjA5Mi0wZTc5LTRjMmEtODdhYy00MGY2ZWZkMjRiMTVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3Mjg0NTQ3MTUsImV4cCI6MTc1OTk5MDcxNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.s62ClYOzEJ6TUK0YuOuZbl5Hj3eBS5N-657LWUILIEE"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/log/v1.0/Log/Get-Business-Views?FilterType=0&StartDate=2024-08-05&EndDate=2024-10-10&PeriodType=1&VendorId={{vendor_id}}&ChannelId={{channel_id}}&FilterSubType=0",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"log",
+						"v1.0",
+						"Log",
+						"Get-Business-Views"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "0"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-08-05"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-10-10"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "VendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "ChannelId",
+							"value": "{{channel_id}}"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Business followers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"pm.expect(body.result.totalCount).to.be.a('Number')\r",
+							"pm.expect(body.result.totalFollowCount).to.be.a('Number')\r",
+							"pm.expect(body.result.totalUnfollowCount).to.be.a('Number')\r",
+							"pm.expect(body.result.isDates).to.be.true\r",
+							"pm.expect(body.result.divider).to.be.a('Number')\r",
+							"pm.expect(body.result.date).to.be.string\r",
+							"pm.expect(body.result.total).to.be.string\r",
+							"pm.expect(body.result.current).to.be.string\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiVXNlcklkIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiRmlyc3ROYW1lIjoidGh1cmlnYSIsIkxhc3ROYW1lIjoidGh1cmkiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6IjJmZGE2OWQ3LWVkNTAtNDY0MC04YTJiLTc3NzRjMDE1ZWViMCIsIkNoYW5uZWxUeXBlIjoiR3JvdXAiLCJDaGFubmVsTmFtZSI6InBvZGRsZSIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoidGh1cmlnYTNAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZjM1ZjIwOTItMGU3OS00YzJhLTg3YWMtNDBmNmVmZDI0YjE1IiwiT3JpZ2luTmFtZSI6IlRlZW4gZmFzaGlvbnMiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJkYzlkNjQyOS1iZDMyLTRkNzAtOGEyNy1hNWQ4ZGFjMDA3NWZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCJmMzVmMjA5Mi0wZTc5LTRjMmEtODdhYy00MGY2ZWZkMjRiMTVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3Mjg0NTQ3MTUsImV4cCI6MTc1OTk5MDcxNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.s62ClYOzEJ6TUK0YuOuZbl5Hj3eBS5N-657LWUILIEE"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v2.0/Vendor/Get-Business-Follows?FilterType=0&StartDate=2024-08-05&EndDate=2024-10-10&PeriodType=1&VendorId={{vendor_id}}&ChannelId={{channel_id}}&FilterSubType=0",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v2.0",
+						"Vendor",
+						"Get-Business-Follows"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "0"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-08-05"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-10-10"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "VendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "ChannelId",
+							"value": "{{channel_id}}"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "staff perfomance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"    pm.expect(body.isError).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation of id\", function(){\r",
+							"    pm.expect(body.result[0].id).to.be.a('string');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation of vendor id\", function(){\r",
+							"    pm.expect(body.result[1].vendorId).to.be.a('string');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation of vendor user id\", function(){\r",
+							"    pm.expect(body.result[2].vendorUserId).to.be.a('string');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation of staff firstname\", function(){\r",
+							"    pm.expect(body.result[3].firstName).to.be.a('string');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation of user points\", function(){\r",
+							"    pm.expect(body.result[4].userPoints).to.be.a('number');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Top performance is a boolean\", function(){\r",
+							" pm.expect(body.result[5].isTopPerformer).to.be.a(\"boolean\");\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MTQxMDgsImV4cCI6MTc2NjA1MDEwOCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.P_AIkVpmcv-fiNwRtltEaUgHtME-QdEUpUafj0L839A"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v4/NFC/GetStaffPerformance?vendorId=349b7842-c4a2-4cb1-abb4-25c48dc88c6e",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v4",
+						"NFC",
+						"GetStaffPerformance"
+					],
+					"query": [
+						{
+							"key": "vendorId",
+							"value": "349b7842-c4a2-4cb1-abb4-25c48dc88c6e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Staff performance filter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false\r",
+							"})\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"  pm.expect(body.result.total).to.be.a('number');\r",
+							"  pm.expect(body.result.date).to.be.a('string')\r",
+							"  pm.expect(body.result.current).to.be.a('number')\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MTQxMDgsImV4cCI6MTc2NjA1MDEwOCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.P_AIkVpmcv-fiNwRtltEaUgHtME-QdEUpUafj0L839A"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v4/NFC/DashBoard-Staff-Performance?FilterType=2&StartDate=2024-12-02&EndDate=2024-12-18&PeriodType=1&ViewType=0&VendorId={{vendor_id}}&ChannelId={{channel_id}}&FilterSubType=5&ApprovalType=0&StafMemberId=",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v4",
+						"NFC",
+						"DashBoard-Staff-Performance"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "2"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-12-02"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-12-18"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "ViewType",
+							"value": "0"
+						},
+						{
+							"key": "VendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "ChannelId",
+							"value": "{{channel_id}}"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "5"
+						},
+						{
+							"key": "ApprovalType",
+							"value": "0"
+						},
+						{
+							"key": "StafMemberId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Followers gained",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"    pm.expect(body.isError).to.be.false\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"    pm.expect(body.result.totalCount).to.be.a('number');\r",
+							"    pm.expect(body.result.totalFollowCount).to.be.a('number');\r",
+							"    pm.expect(body.result.totalUnfollowCount).to.be.a('number');\r",
+							"    pm.expect(body.result.isDates).to.be.true;\r",
+							"    pm.expect(body.result.divider).to.be.a('number');\r",
+							"    pm.expect(body.date).to.be.string\r",
+							"    pm.expect(body.result.total).to.be.string\r",
+							"    pm.expect(body.result.current).to.be.string\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiVXNlcklkIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiRmlyc3ROYW1lIjoidGh1cmlnYSIsIkxhc3ROYW1lIjoidGh1cmkiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6IjJmZGE2OWQ3LWVkNTAtNDY0MC04YTJiLTc3NzRjMDE1ZWViMCIsIkNoYW5uZWxUeXBlIjoiR3JvdXAiLCJDaGFubmVsTmFtZSI6InBvZGRsZSIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoidGh1cmlnYTNAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZjM1ZjIwOTItMGU3OS00YzJhLTg3YWMtNDBmNmVmZDI0YjE1IiwiT3JpZ2luTmFtZSI6IlRlZW4gZmFzaGlvbnMiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJkYzlkNjQyOS1iZDMyLTRkNzAtOGEyNy1hNWQ4ZGFjMDA3NWZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCJmMzVmMjA5Mi0wZTc5LTRjMmEtODdhYy00MGY2ZWZkMjRiMTVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3Mjg0NTQ3MTUsImV4cCI6MTc1OTk5MDcxNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.s62ClYOzEJ6TUK0YuOuZbl5Hj3eBS5N-657LWUILIEE"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v4/NFC/DashBoard-Staff-Performance?FilterType=2&StartDate=2024-08-05&EndDate=2024-10-10&PeriodType=1&ViewType=0&VendorId={{vendor_id}}&ChannelId={{channel_id}}&FilterSubType=5&ApprovalType=0&StafMemberId=",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v4",
+						"NFC",
+						"DashBoard-Staff-Performance"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "2"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-08-05"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-10-10"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "ViewType",
+							"value": "0"
+						},
+						{
+							"key": "VendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "ChannelId",
+							"value": "{{channel_id}}"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "5"
+						},
+						{
+							"key": "ApprovalType",
+							"value": "0"
+						},
+						{
+							"key": "StafMemberId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NFC approvals",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"    pm.expect(body.isError).to.be.false\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"    pm.expect(body.result.totalCount).to.be.a('number');\r",
+							"    pm.expect(body.result.totalFollowCount).to.be.a('number');\r",
+							"    pm.expect(body.result.totalUnfollowCount).to.be.a('number');\r",
+							"    pm.expect(body.result.isDates).to.be.true;\r",
+							"    pm.expect(body.result.divider).to.be.a('number');\r",
+							"    pm.expect(body.date).to.be.string\r",
+							"    pm.expect(body.result.total).to.be.string\r",
+							"    pm.expect(body.result.current).to.be.string\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiVXNlcklkIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiRmlyc3ROYW1lIjoidGh1cmlnYSIsIkxhc3ROYW1lIjoidGh1cmkiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6IjJmZGE2OWQ3LWVkNTAtNDY0MC04YTJiLTc3NzRjMDE1ZWViMCIsIkNoYW5uZWxUeXBlIjoiR3JvdXAiLCJDaGFubmVsTmFtZSI6InBvZGRsZSIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoidGh1cmlnYTNAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZjM1ZjIwOTItMGU3OS00YzJhLTg3YWMtNDBmNmVmZDI0YjE1IiwiT3JpZ2luTmFtZSI6IlRlZW4gZmFzaGlvbnMiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJkYzlkNjQyOS1iZDMyLTRkNzAtOGEyNy1hNWQ4ZGFjMDA3NWZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCJmMzVmMjA5Mi0wZTc5LTRjMmEtODdhYy00MGY2ZWZkMjRiMTVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3Mjg0NTQ3MTUsImV4cCI6MTc1OTk5MDcxNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.s62ClYOzEJ6TUK0YuOuZbl5Hj3eBS5N-657LWUILIEE"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v4/NFC/DashBoard-Staff-Performance?FilterType=2&StartDate=2024-08-05&EndDate=2024-10-10&PeriodType=1&ViewType=0&VendorId={{vendor_id}}&ChannelId={{channel_id}}&FilterSubType=6&ApprovalType=0&StafMemberId=",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v4",
+						"NFC",
+						"DashBoard-Staff-Performance"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "2"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-08-05"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-10-10"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "ViewType",
+							"value": "0"
+						},
+						{
+							"key": "VendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "ChannelId",
+							"value": "{{channel_id}}"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "6"
+						},
+						{
+							"key": "ApprovalType",
+							"value": "0"
+						},
+						{
+							"key": "StafMemberId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retain and grow scheme",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation for scheme members\", function(){\r",
+							"pm.expect(body.result.schemeMembers).to.equal(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation for members visited\", function(){\r",
+							"pm.expect(body.result.membersVisited).to.equal(4)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation for minimum spent members\", function(){\r",
+							"pm.expect(body.result.minimumSpentMembers).to.be.a('Number')\r",
+							"})\r",
+							"\r",
+							"//pm.environment.set('businessId', body.result.businessId)\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMjE2MzcxNjYtNzAzMC00MDQyLWFhMjktMWMwM2JkYmRlOWQwIiwiVXNlcklkIjoiMjE2MzcxNjYtNzAzMC00MDQyLWFhMjktMWMwM2JkYmRlOWQwIiwiRmlyc3ROYW1lIjoiS2FuY2hhbmEiLCJMYXN0TmFtZSI6IkpheWVuZHJhbiIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJqa2FuY2h1MTlAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiMTAzMTkwNGMtNGQ4NS00MjA1LWI5NWMtZjE4MGQ3MjhmYTU3IiwiT3JpZ2luTmFtZSI6Im9kZWwgd2Vsc2giLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCIxNWUzM2MzNC0wN2ViLTRkNmQtOWQ1Ny0xNzRlMGUxOWM3NzBcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIxMDMxOTA0Yy00ZDg1LTQyMDUtYjk1Yy1mMTgwZDcyOGZhNTdcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiNDI3ZWM1NjgtMzgxMC00NGQ4LWJlNjEtMDhkYzYwNWY4MjQxXCIsXCJMYW5ndWFnZU5hbWVcIjpcIldlbHNoXCIsXCJMYW5ndWFnZUNvZGVcIjpcImN5LUdCXCJ9IiwibmJmIjoxNzIzMDE5ODAxLCJleHAiOjE3NTQ1NTU4MDEsImlzcyI6IlVDRFAiLCJhdWQiOiJCdWJsX3VzZXJzIn0.GlSsd9c7pFAMY0pBhMhCzEn7i07bENzVusYzUDBicgM"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.owlocal.co.uk"
+					},
+					{
+						"key": "pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.owlocal.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not)A;Brand\";v=\"99\", \"Google Chrome\";v=\"127\", \"Chromium\";v=\"127\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_Url}}/api/Catalog/v4/Stamp/RetainGrowSchemeDBInfo?businessId={{businessId}}&channelId={{channel_id}}",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Catalog",
+						"v4",
+						"Stamp",
+						"RetainGrowSchemeDBInfo"
+					],
+					"query": [
+						{
+							"key": "businessId",
+							"value": "{{businessId}}"
+						},
+						{
+							"key": "channelId",
+							"value": "{{channel_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View retain and grow graph",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"    pm.expect(body.result.totalCount).to.be.a('number');\r",
+							"    pm.expect(body.result.totalFollowCount).to.be.a('number');\r",
+							"    pm.expect(body.result.totalUnfollowCount).to.be.a('number');\r",
+							"    pm.expect(body.result.isDates).to.be.true;\r",
+							"    pm.expect(body.result.divider).to.be.a('number');\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiVXNlcklkIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiRmlyc3ROYW1lIjoidGh1cmlnYSIsIkxhc3ROYW1lIjoidGh1cmkiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tVVMsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6IjJmZGE2OWQ3LWVkNTAtNDY0MC04YTJiLTc3NzRjMDE1ZWViMCIsIkNoYW5uZWxUeXBlIjoiR3JvdXAiLCJDaGFubmVsTmFtZSI6InBvZGRsZSIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoidGh1cmlnYTNAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZjM1ZjIwOTItMGU3OS00YzJhLTg3YWMtNDBmNmVmZDI0YjE1IiwiT3JpZ2luTmFtZSI6IlRlZW4gZmFzaGlvbnMiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJkYzlkNjQyOS1iZDMyLTRkNzAtOGEyNy1hNWQ4ZGFjMDA3NWZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCJmMzVmMjA5Mi0wZTc5LTRjMmEtODdhYy00MGY2ZWZkMjRiMTVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3Mjg2MjY0OTgsImV4cCI6MTc2MDE2MjQ5OCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.zJ030VO_7F62sGmXjC1GAsXB0vHSEE8CskLdysidQgY"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Catalog/v4/Stamp/RetainGrowDBGraphInfo?FilterType=1&PeriodType=1&FilterSubType=3&ViewType=0&StartDate=2024-08-05&EndDate=2024-10-11&VendorId={{vendor_id}}&ChannelId={{channel_id}}",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Catalog",
+						"v4",
+						"Stamp",
+						"RetainGrowDBGraphInfo"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "1"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "3"
+						},
+						{
+							"key": "ViewType",
+							"value": "0"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-08-05"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-10-11"
+						},
+						{
+							"key": "VendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "ChannelId",
+							"value": "{{channel_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Offer order details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation for online orders fulfilledOrdersAmount\", function(){\r",
+							"pm.expect(body.result.fulfilledOrdersAmount).to.be.string   \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation for online orders unfulfilledOrdersAmount\", function(){\r",
+							"pm.expect(body.result.fulfilledOrdersAmount).to.be.string   \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response validation for online orders total offer orders amount\", function(){\r",
+							"pm.expect(body.result.fulfilledOrdersAmount).to.be.string   \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation for instore offers total offer orders amount\", function(){\r",
+							"pm.expect(body.result.fulfilledOrdersAmount).to.be.string   \r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMjE2MzcxNjYtNzAzMC00MDQyLWFhMjktMWMwM2JkYmRlOWQwIiwiVXNlcklkIjoiMjE2MzcxNjYtNzAzMC00MDQyLWFhMjktMWMwM2JkYmRlOWQwIiwiRmlyc3ROYW1lIjoiS2FuY2hhbmEiLCJMYXN0TmFtZSI6IkpheWVuZHJhbiIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJqa2FuY2h1MTlAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiMTAzMTkwNGMtNGQ4NS00MjA1LWI5NWMtZjE4MGQ3MjhmYTU3IiwiT3JpZ2luTmFtZSI6Im9kZWwgd2Vsc2giLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCIxNWUzM2MzNC0wN2ViLTRkNmQtOWQ1Ny0xNzRlMGUxOWM3NzBcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIxMDMxOTA0Yy00ZDg1LTQyMDUtYjk1Yy1mMTgwZDcyOGZhNTdcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiNDI3ZWM1NjgtMzgxMC00NGQ4LWJlNjEtMDhkYzYwNWY4MjQxXCIsXCJMYW5ndWFnZU5hbWVcIjpcIldlbHNoXCIsXCJMYW5ndWFnZUNvZGVcIjpcImN5LUdCXCJ9IiwibmJmIjoxNzIzMDE5ODAxLCJleHAiOjE3NTQ1NTU4MDEsImlzcyI6IlVDRFAiLCJhdWQiOiJCdWJsX3VzZXJzIn0.GlSsd9c7pFAMY0pBhMhCzEn7i07bENzVusYzUDBicgM"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.owlocal.co.uk"
+					},
+					{
+						"key": "pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.owlocal.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Not)A;Brand\";v=\"99\", \"Google Chrome\";v=\"127\", \"Chromium\";v=\"127\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_Url}}/api/Catalog/v3.0/Offer/get-offer-order-details?vendorId={{vendor_id}}&channelId={{channel_id}}",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Catalog",
+						"v3.0",
+						"Offer",
+						"get-offer-order-details"
+					],
+					"query": [
+						{
+							"key": "vendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "channelId",
+							"value": "{{channel_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Online purchase",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body  = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"pm.expect(body.result.totalCount).to.be.a('number')\r",
+							"pm.expect(body.result.totalFollowCount).to.be.a('number')\r",
+							"pm.expect(body.result.totalUnfollowCount).to.be.a('number')\r",
+							"pm.expect(body.result.isDates).to.be.true\r",
+							"pm.expect(body.result.divider).to.be.a('number')\r",
+							"pm.expect(body.result.date).to.be.string\r",
+							"pm.expect(body.result.total).to.be.string\r",
+							"pm.expect(body.result.current).to.be.string\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MTQxMDgsImV4cCI6MTc2NjA1MDEwOCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.P_AIkVpmcv-fiNwRtltEaUgHtME-QdEUpUafj0L839A"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Catalog/v3.0/Offer/get-advanced-order-details?FilterType=3&StartDate=2024-12-02&EndDate=2024-12-18&PeriodType=1&ViewType=0&VendorId={{vendor_id}}&ChannelId={{channel_id}}&FilterSubType=0&ApprovalType=0&StatusType=0&DealType=0&DealFilter=1",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Catalog",
+						"v3.0",
+						"Offer",
+						"get-advanced-order-details"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "3"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-12-02"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-12-18"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "ViewType",
+							"value": "0"
+						},
+						{
+							"key": "VendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "ChannelId",
+							"value": "{{channel_id}}"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "0"
+						},
+						{
+							"key": "ApprovalType",
+							"value": "0"
+						},
+						{
+							"key": "StatusType",
+							"value": "0"
+						},
+						{
+							"key": "DealType",
+							"value": "0"
+						},
+						{
+							"key": "DealFilter",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "In - store deal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body  = pm.response.json();\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response validation\", function(){\r",
+							"pm.expect(body.result.totalCount).to.be.a('number')\r",
+							"pm.expect(body.result.totalFollowCount).to.be.a('number')\r",
+							"pm.expect(body.result.totalUnfollowCount).to.be.a('number')\r",
+							"pm.expect(body.result.isDates).to.be.true\r",
+							"pm.expect(body.result.divider).to.be.a('number')\r",
+							"pm.expect(body.result.date).to.be.string\r",
+							"pm.expect(body.result.total).to.be.string\r",
+							"pm.expect(body.result.current).to.be.string\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiVXNlcklkIjoiMzYwMzU3NjgtMzhlOS00MjAyLTg2MWEtMWI3MzJiNTU3OWVkIiwiRmlyc3ROYW1lIjoidGh1cmlnYSIsIkxhc3ROYW1lIjoidGh1cmkiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tVVMsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6IjJmZGE2OWQ3LWVkNTAtNDY0MC04YTJiLTc3NzRjMDE1ZWViMCIsIkNoYW5uZWxUeXBlIjoiR3JvdXAiLCJDaGFubmVsTmFtZSI6InBvZGRsZSIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoidGh1cmlnYTNAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZjM1ZjIwOTItMGU3OS00YzJhLTg3YWMtNDBmNmVmZDI0YjE1IiwiT3JpZ2luTmFtZSI6IlRlZW4gZmFzaGlvbnMiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJkYzlkNjQyOS1iZDMyLTRkNzAtOGEyNy1hNWQ4ZGFjMDA3NWZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCJmMzVmMjA5Mi0wZTc5LTRjMmEtODdhYy00MGY2ZWZkMjRiMTVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3Mjg2MjY0OTgsImV4cCI6MTc2MDE2MjQ5OCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.zJ030VO_7F62sGmXjC1GAsXB0vHSEE8CskLdysidQgY"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Catalog/v3.0/Offer/get-advanced-order-details?FilterType=4&StartDate=2024-08-05&EndDate=2024-10-11&PeriodType=1&ViewType=0&VendorId={{vendor_id}}&ChannelId={{channel_id}}&FilterSubType=0&ApprovalType=0&StatusType=0&DealType=4",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Catalog",
+						"v3.0",
+						"Offer",
+						"get-advanced-order-details"
+					],
+					"query": [
+						{
+							"key": "FilterType",
+							"value": "4"
+						},
+						{
+							"key": "StartDate",
+							"value": "2024-08-05"
+						},
+						{
+							"key": "EndDate",
+							"value": "2024-10-11"
+						},
+						{
+							"key": "PeriodType",
+							"value": "1"
+						},
+						{
+							"key": "ViewType",
+							"value": "0"
+						},
+						{
+							"key": "VendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "ChannelId",
+							"value": "{{channel_id}}"
+						},
+						{
+							"key": "FilterSubType",
+							"value": "0"
+						},
+						{
+							"key": "ApprovalType",
+							"value": "0"
+						},
+						{
+							"key": "StatusType",
+							"value": "0"
+						},
+						{
+							"key": "DealType",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Status code is 200\", function(){\r",
+					"    pm.response.to.have.status(200);\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Status code validation\", function(){\r",
+					"    pm.response.to.have.status(\"OK\");\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Status code is not 500\", function(){\r",
+					"    pm.response.to.have.not.status(500);\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Verify response code is not internal server error\", function(){\r",
+					"    pm.response.to.have.not.status(\"Internal Server Error\");\r",
+					"});\r",
+					"\r",
+					"pm.test(\"response time is less than 1000ms\",() =>{\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+					"});"
+				]
+			}
+		}
+	]
+}
