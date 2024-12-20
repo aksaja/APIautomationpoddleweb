@@ -1,0 +1,3549 @@
+{
+	"info": {
+		"_postman_id": "ba1c36ac-f44c-4ec8-ad20-1a3a882c8310",
+		"name": "D: Retain and Grow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26111120",
+		"_collection_link": "https://winter-trinity-851878.postman.co/workspace/Poddle-business-Web-~2bb7aeee-71e2-4cb7-9720-ae5ca1ab3b23/collection/26111120-ba1c36ac-f44c-4ec8-ad20-1a3a882c8310?action=share&source=collection_link&creator=26111120"
+	},
+	"item": [
+		{
+			"name": "An existing reward",
+			"item": [
+				{
+					"name": "Retain and Grow Form",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('status code is 200', () => {",
+									"    pm.response.to.have.status(200); })",
+									"",
+									"pm.test('Status code is not 500', () => {",
+									"    pm.response.to.not.have.status(500); })",
+									"",
+									"pm.test('Verify the Response Time', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000); })",
+									"",
+									"pm.test(\"Result Validation\", () => {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.result.stampReward).to.be.an('array');",
+									"    pm.expect(jsonData.result.newFollowerOffer.isCreated).to.be.a (\"boolean\");",
+									"    pm.expect(jsonData.result.newFollowerOffer.isSelected).to.be.a (\"boolean\");",
+									"    pm.expect(jsonData.result.cashCredit.isCreated).to.be.a (\"boolean\");",
+									"    pm.expect(jsonData.result.cashCredit.isSelected).to.be.a (\"boolean\");",
+									"    pm.expect(jsonData.result.selectNewFollowerRewardType).to.be.a(\"number\");",
+									"    pm.expect(jsonData.isError).to.equal (false);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{base_Url}}/api/Catalog/v4/Stamp/NewFollowerPromotion?vendorId={{vendor_id}}",
+							"host": [
+								"{{base_Url}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v4",
+								"Stamp",
+								"NewFollowerPromotion"
+							],
+							"query": [
+								{
+									"key": "vendorId",
+									"value": "{{vendor_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Upload ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.baseImage).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "File",
+									"type": "file",
+									"src": "/C:/Users/aksaj/OneDrive/Desktop/Durka/Downloaded Images/christmas-3015776_1920.jpg"
+								}
+							]
+						},
+						"url": "{{base_Url}}/api/Industry/v1.1/Industry/Image"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Stamp with Existing Reward",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set ('retain_grow_id', jsonData.result.id); \r",
+									"\r",
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (10000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"\r",
+									"    // an existing reward properties validation \r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.minimumCollectStamp).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.stampTierType).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.amount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.productName).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.isSelected).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.selectNewFollowerRewardType).to.be.a (\"number\");\r",
+									"\r",
+									"    // Reward Details Properties Validation \r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.minimumSpendAmount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.channelId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.stampTiers).to.be.an (\"array\");\r",
+									"\r",
+									"    // Stamps Tiers Properties Validation \r",
+									"    for ( var x=0 ; x<jsonData.result.stampTiers.length ; x++) \r",
+									"    {   pm.expect (jsonData.result.stampTiers[x].sequenceId).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].minimumCollectStamp).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].productName).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].id).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].stampTierType).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].amount).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].stampId).to.be.a (\"String\");\r",
+									"    }\r",
+									"\r",
+									"    pm.expect (jsonData.result.useVendorImage).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test (\"Existing Reward Properties validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    let stampRewardid = (jsonData.result.newFollowerPromotionReward.stampReward.id);\r",
+									"    let sequenceId = (jsonData.result.newFollowerPromotionReward.stampReward.sequenceId);\r",
+									"    let minimumCollectStamp = (jsonData.result.newFollowerPromotionReward.stampReward.minimumCollectStamp);\r",
+									"    let stampTierType = (jsonData.result.newFollowerPromotionReward.stampReward.stampTierType);\r",
+									"    let amount = (jsonData.result.newFollowerPromotionReward.stampReward.amount);\r",
+									"    let productName = (jsonData.result.newFollowerPromotionReward.stampReward.productName);\r",
+									"\r",
+									"    for ( var y=0 ; y<jsonData.result.stampTiers.length; y++) { \r",
+									"        if ( pm.expect (jsonData.result.stampTiers[y].id).to.equal (stampRewardid)) \r",
+									"        {   pm.expect (jsonData.result.stampTiers[y].sequenceId).to.equal (sequenceId);\r",
+									"            pm.expect (jsonData.result.stampTiers[y].minimumCollectStamp).to.equal (minimumCollectStamp);\r",
+									"            pm.expect (jsonData.result.stampTiers[y].stampTierType).to.equal (stampTierType);\r",
+									"            pm.expect (jsonData.result.stampTiers[y].amount).to.equal (amount);\r",
+									"            pm.expect (jsonData.result.stampTiers[y].productName).to.equal (productName);\r",
+									"        }\r",
+									"    }\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1ODI2NjksImV4cCI6MTc2NjExODY2OSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.cdgio3lknX9ISsAUx98pp9GOHj1-Cnq6j0biCA6WSlo"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"425018cc-ec31-4e68-6635-08dd1e8f4161\",\r\n    \"vendorId\": \"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\r\n    \"channelId\": \"2fda69d7-ed50-4640-8a2b-7774c015eeb0\",\r\n    \"name\": \"\",\r\n    \"imageUrls\": [\r\n        \"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/349b7842-c4a2-4cb1-abb4-25c48dc88c6e/Image/0d4d7425-78a0-4e9b-b2f0-8605ed02b92b\"\r\n    ],\r\n    \"stampTiers\": [\r\n        {\r\n            \"id\": \"3f3cb890-9df2-4ff4-a6a1-08dd1e8f4161\",\r\n            \"sequenceId\": 0,\r\n            \"minimumCollectStamp\": 3,\r\n            \"amount\": \"10\",\r\n            \"stampTierType\": 2,\r\n            \"productName\": \"\",\r\n            \"isSelected\": true,\r\n            \"productImage\": \"\",\r\n            \"levelName\": \"10% off\"\r\n        },\r\n        {\r\n            \"id\": \"3ebdde3d-96b6-452f-a6a2-08dd1e8f4161\",\r\n            \"sequenceId\": 1,\r\n            \"minimumCollectStamp\": 5,\r\n            \"amount\": \"15\",\r\n            \"stampTierType\": 2,\r\n            \"productName\": \"\",\r\n            \"isSelected\": false,\r\n            \"productImage\": \"\",\r\n            \"levelName\": \"15% off\"\r\n        }\r\n    ],\r\n    \"useVendorImage\": true,\r\n    \"minimumSpendAmount\": \"60\",\r\n    \"newFollowerPromotionReward\": {\r\n        \"entityId\": \"3f3cb890-9df2-4ff4-a6a1-08dd1e8f4161\",\r\n        \"followerRewardType\": 1,\r\n        \"rewardSequenceId\": 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_Url}}/api/Catalog/v4/Stamp"
+					},
+					"response": []
+				},
+				{
+					"name": "Stamp Details Validation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (10000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"\r",
+									"    // an existing reward properties validation \r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.minimumCollectStamp).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.stampTierType).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.amount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.productName).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.stampReward.isSelected).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.selectNewFollowerRewardType).to.be.a (\"number\");\r",
+									"\r",
+									"    // Reward Details Properties Validation \r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.minimumSpendAmount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.channelId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.stampTiers).to.be.an (\"array\");\r",
+									"\r",
+									"    // Stamps Tiers Properties Validation \r",
+									"    for ( var x=0 ; x<jsonData.result.stampTiers.length ; x++) \r",
+									"    {   pm.expect (jsonData.result.stampTiers[x].sequenceId).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].minimumCollectStamp).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].productName).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].id).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].stampTierType).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].amount).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.stampTiers[x].stampId).to.be.a (\"String\");\r",
+									"    }\r",
+									"\r",
+									"    pm.expect (jsonData.result.useVendorImage).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"url": "{{baseUrl}}/api/Catalog/v4/Stamp/{{retain_grow_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Promotion Pop up Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (10000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"\r",
+									"    // an existing reward properties validation \r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.channelId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.entityId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.promoteTargetType).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.logs).to.be.an (\"array\");\r",
+									"\r",
+									"    for ( var x=0 ; x<jsonData.result.logs.length; x++)\r",
+									"    {   pm.expect (jsonData.result.logs[x].promoteId).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].socialMediaType).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].socialMediaName).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].deepLink).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].clicksCount).to.be.a (\"number\"); \r",
+									"        pm.expect (jsonData.result.logs[x].isActive).to.equal (true); \r",
+									"        pm.expect (jsonData.result.logs[x].id).to.be.a (\"String\");\r",
+									"    }\r",
+									"\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Industry/v4/Promotes/get-promote-deeplink?ChannelId={{channel_id}}&PathType=14&EntityId={{retain_grow_id}}&SocialEnabled=true&SocialTitle=&SocialDescription=&SocialImageLink=&referenceId={{retain_grow_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Industry",
+								"v4",
+								"Promotes",
+								"get-promote-deeplink"
+							],
+							"query": [
+								{
+									"key": "ChannelId",
+									"value": "{{channel_id}}"
+								},
+								{
+									"key": "PathType",
+									"value": "14"
+								},
+								{
+									"key": "EntityId",
+									"value": "{{retain_grow_id}}"
+								},
+								{
+									"key": "SocialEnabled",
+									"value": "true"
+								},
+								{
+									"key": "SocialTitle",
+									"value": ""
+								},
+								{
+									"key": "SocialDescription",
+									"value": ""
+								},
+								{
+									"key": "SocialImageLink",
+									"value": ""
+								},
+								{
+									"key": "referenceId",
+									"value": "{{retain_grow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retain and Grow Scheme Delete API ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiM2M3ZjgwZjQtOWNjMi00NWY2LWE2NzYtNGI1NmNmMDVjZjllIiwiVXNlcklkIjoiM2M3ZjgwZjQtOWNjMi00NWY2LWE2NzYtNGI1NmNmMDVjZjllIiwiRmlyc3ROYW1lIjoiRGlsYXgiLCJMYXN0TmFtZSI6IkQiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tVVMsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6ImVlMGEyZDRhLTQyMTMtNGU3Ny1hMjgzLWY4NWJhYjhlYzFiNCIsIkNoYW5uZWxUeXBlIjoiQWxsIiwiQ2hhbm5lbE5hbWUiOiJWZW5kb3Igd2ViIEFsbCIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoiamVoaXIzNTgwOEBrYXVkYXQuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZGU0MmFhNTItNzZkMS00NDU5LWIyZjktMDhkYjI5ZDVhMzkyIiwiT3JpZ2luTmFtZSI6Ik1heXUgU2hvcCIsIlRva2VuVHlwZSI6IkxvZ2luVG9rZW4iLCJWMiI6IlRydWUiLCJJc1N1cGVyVXNlciI6dHJ1ZSwiUm9sZSI6Ilt7XCJSb2xlSWRcIjpcIjU4NzQyNmNmLTVhMGMtNDRiMy05YzY0LWFkYjkyYWY5YzBmNlwiLFwiUm9sZU5hbWVcIjpcIlN1cGVyIFVzZXJcIixcIk9yZ2luSWRcIjpcImRlNDJhYTUyLTc2ZDEtNDQ1OS1iMmY5LTA4ZGIyOWQ1YTM5MlwifV0iLCJuYmYiOjE2OTU4MjY3NTYsImV4cCI6MTcyNzM2Mjc1NiwiaXNzIjoiVUNEUCIsImF1ZCI6IkJ1YmxfdXNlcnMifQ.tG1l6_Hr6_AfeEOd4ATaYMTp6JZS9Uia5GTLfVepOMI"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Catalog/v4/Stamp?stampId={{retain_grow_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v4",
+								"Stamp"
+							],
+							"query": [
+								{
+									"key": "stampId",
+									"value": "{{retain_grow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Follower Offer",
+			"item": [
+				{
+					"name": "Retain and Grow Form",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('status code is 200', () => {",
+									"    pm.response.to.have.status(200); })",
+									"",
+									"pm.test('Status code is not 500', () => {",
+									"    pm.response.to.not.have.status(500); })",
+									"",
+									"pm.test('Verify the Response Time', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000); })",
+									"",
+									"pm.test(\"Result Validation\", () => {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.result.stampReward).to.be.an('array');",
+									"    pm.expect(jsonData.result.newFollowerOffer.isCreated).to.be.a (\"Boolean\");",
+									"    pm.expect(jsonData.result.newFollowerOffer.isSelected).to.be.a (\"Boolean\");",
+									"    pm.expect(jsonData.result.cashCredit.isCreated).to.equal (false);",
+									"    pm.expect(jsonData.result.cashCredit.isSelected).to.equal (false);",
+									"    pm.expect(jsonData.result.selectNewFollowerRewardType).to.be.a(\"number\");",
+									"    pm.expect(jsonData.isError).to.equal (false);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Catalog/v4/Stamp/NewFollowerPromotion?vendorId={{vendor_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v4",
+								"Stamp",
+								"NewFollowerPromotion"
+							],
+							"query": [
+								{
+									"key": "vendorId",
+									"value": "{{vendor_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Upload",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.baseImage).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "File",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/mug-2597167_1280.jpg"
+								}
+							]
+						},
+						"url": "{{baseUrl}}/api/Industry/v1.1/Industry/Image"
+					},
+					"response": []
+				},
+				{
+					"name": "New Follower Offer (fixed amount) Validation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set ('newfolloweroffer_id', jsonData.result.id);\r",
+									"\r",
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.desc).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.isPercentage).to.equal (false);\r",
+									"    pm.expect (jsonData.result.amount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.originalValue).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isOneTime).to.equal (true);\r",
+									"    pm.expect (jsonData.result.isNewFollower).to.equal (true);\r",
+									"\r",
+									"    for (var x=0 ; x<jsonData.result.categories.subCategories.length ; x++)\r",
+									"    {   pm.expect (jsonData.result.categories.subCategories[x].id).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.categories.subCategories[x].name).to.be.a (\"String\");\r",
+									"    }\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Type\": 4,\r\n    \"CampaignType\": 1,\r\n    \"VendorId\": \"{{vendor_id}}\",\r\n    \"HowToUse\": null,\r\n    \"Name\": \"Supreme Off [New Follower]\",\r\n    \"Desc\": \"New follower offer of tara shine \",\r\n    \"UseOfferImage\": [\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/87fec3b1-521b-4814-bab0-712b164cce08\",\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/19b7df4d-7466-45e0-8c43-78174aed5933\",\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/626230ff-93cf-4edd-8d78-2921c9396570\"\r\n    ],\r\n    \"UseVendorHomeImage\": true,\r\n    \"ImageUrls\": [\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/87fec3b1-521b-4814-bab0-712b164cce08\",\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/19b7df4d-7466-45e0-8c43-78174aed5933\",\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/626230ff-93cf-4edd-8d78-2921c9396570\"\r\n    ],\r\n    \"AboutOffer\": null,\r\n    \"IndustryId\": \"86f62152-48f7-4e19-a548-9975b6ad2185\",\r\n    \"OfferCategoy\": {\r\n        \"id\": \"86f62152-48f7-4e19-a548-9975b6ad2185\",\r\n        \"name\": \"Corn Foods vn\",\r\n        \"subCategories\": [\r\n            {\r\n                \"id\": \"b625357f-182c-4eaa-2462-08dc47c5de21\",\r\n                \"name\": \"Corn Briyani\"\r\n            },\r\n            {\r\n                \"id\": \"58e237fd-dade-42d2-246a-08dc47c5de21\",\r\n                \"name\": \"Corn Pulav\"\r\n            }\r\n        ]\r\n    },\r\n    \"Keyword\": \"\",\r\n    \"promotedCount\": null,\r\n    \"IsPercentage\": false,\r\n    \"IsJustOnePrice\": true,\r\n    \"IsActive\": true,\r\n    \"OfferDiscounts\": [\r\n        {\r\n            \"SequenceId\": 0,\r\n            \"Name\": \"deal 01\",\r\n            \"IsPercentage\": false,\r\n            \"Amount\": 1,\r\n            \"OriginalValue\": 10,\r\n            \"MaxRedeemLimit\": 0\r\n        }\r\n    ],\r\n    \"IsNewFollower\": true,\r\n    \"MinSpendAmount\": null,\r\n    \"IsOneTime\": false,\r\n    \"ValidFromTime\": null,\r\n    \"ValidToTime\": null,\r\n    \"ApplicableDayList\": [],\r\n    \"OfferMembershipSchemes\": [],\r\n    \"AvailabilityRestriction\": false\r\n}"
+						},
+						"url": "{{baseUrl}}/api/Catalog/v4.0/Offer"
+					},
+					"response": []
+				},
+				{
+					"name": "New Follower Offer Detail Validation [Fixed amount]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.desc).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.isPercentage).to.equal (false);\r",
+									"    pm.expect (jsonData.result.amount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.originalValue).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isOneTime).to.equal (true);\r",
+									"    pm.expect (jsonData.result.isNewFollower).to.equal (true);\r",
+									"\r",
+									"    for (var x=0 ; x<jsonData.result.categories.subCategories.length ; x++)\r",
+									"    {   pm.expect (jsonData.result.categories.subCategories[x].id).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.categories.subCategories[x].name).to.be.a (\"String\");\r",
+									"    }\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"url": "{{baseUrl}}/api/Catalog/v2.0/Offer/{{newfolloweroffer_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update New Follower offer [Percentage]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.desc).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.isPercentage).to.equal (false);\r",
+									"    pm.expect (jsonData.result.amount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.originalValue).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isOneTime).to.equal (true);\r",
+									"    pm.expect (jsonData.result.isNewFollower).to.equal (true);\r",
+									"\r",
+									"    for (var x=0 ; x<jsonData.result.categories.subCategories.length ; x++)\r",
+									"    {   pm.expect (jsonData.result.categories.subCategories[x].id).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.categories.subCategories[x].name).to.be.a (\"String\");\r",
+									"    }\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Id\":\"1e74f6fc-4d2b-4763-e1fb-08dd1e8fbcf2\",\"Type\":4,\"CampaignType\":1,\"VendorId\":\"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\"HowToUse\":null,\"Name\":\"20% Off for this Scheme\",\"Desc\":\"This is New Follower Offer for this Stamps Scheme\",\"UseOfferImage\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Temp/6ac02a5f-7f65-4957-ad10-ff3abcadf227\"],\"UseVendorHomeImage\":false,\"ImageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Temp/6ac02a5f-7f65-4957-ad10-ff3abcadf227\"],\"AboutOffer\":null,\"IndustryId\":null,\"OfferCategoy\":null,\"Keyword\":\"\",\"promotedCount\":null,\"IsPercentage\":true,\"IsJustOnePrice\":true,\"IsActive\":true,\"OfferDiscounts\":[{\"id\":\"b4380446-0b17-415f-1d6a-08dd1e8fbcf3\",\"SequenceId\":0,\"Name\":\"20% Off\",\"IsPercentage\":true,\"Amount\":\"20\",\"OriginalValue\":\"15\",\"MaxRedeemLimit\":0}],\"IsNewFollower\":true,\"MinSpendAmount\":null,\"IsOneTime\":false,\"ValidFromTime\":null,\"ValidToTime\":null,\"ApplicableDayList\":[],\"OfferMembershipSchemes\":[],\"AvailabilityRestriction\":false}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://uat.api.demotown.co.uk/api/Catalog/v4.0/Offer",
+						"description": "Generated from cURL: curl 'https://uat.api.demotown.co.uk/api/Catalog/v4.0/Offer' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: application/json, text/plain, */*' \\\r\n  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiVXNlcklkIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiRmlyc3ROYW1lIjoiSnVzdGluIiwiTGFzdE5hbWUiOiJBaml0aCIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJCdWJsIiwiQ2xpZW50SWQiOiJkYmIxYWU1Yy1mM2Y2LTQ1ZTgtYWIxOS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiQWRtaW5XZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1HQiwgZW4tVVM7IHE9MC45LCBlbjsgcT0wLjgiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiQ2hhbm5lbE5hbWUiOiJwb2RkbGUiLCJQaG9uZW51bWJlciI6IiIsIlBob25lbnVtYmVyVmVyaWZpZWQiOmZhbHNlLCJFbWFpbCI6Imp1c3RpbmFqaXRoMDhAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiMGM2NTg4NGQtYzQwZC00YWUxLWJkNDctNThhMWI0ZDM1NjAxIiwiT3JpZ2luTmFtZSI6ImJ1YmwiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJmMDY0ZTQzOS02ZjY4LTRhZTgtYTQyZS03ZWJhOTcyMTNiM2RcIixcIlJvbGVOYW1lXCI6XCJCdWJsIEFkbWluXCIsXCJPcmdpbklkXCI6XCIwYzY1ODg0ZC1jNDBkLTRhZTEtYmQ0Ny01OGExYjRkMzU2MDFcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MjcwNzE2MzUsImV4cCI6MTc1ODYwNzYzNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.8ycY-95xK_vPjIhyezyPguvz6UA-EX56YO7tPwW-F-Y' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://admin.poddleuat.demotown.co.uk' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://admin.poddleuat.demotown.co.uk/' \\\r\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-site' \\\r\n  -H 'timezone: +1' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"Id\":\"fce7af56-cdd2-495f-f832-08dce90eff76\",\"Type\":4,\"CampaignType\":1,\"VendorId\":\"50cdf83c-82be-4031-a249-b7b675a0984c\",\"HowToUse\":null,\"Name\":\"20% Off for this Scheme\",\"Desc\":\"This is New Follower Offer for this Stamps Scheme\",\"UseOfferImage\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/1afea8cd-28d8-4f55-9612-3a581a8a3a51\",\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/01e57c8a-7113-4287-8bb0-82a279b565ef\"],\"UseVendorHomeImage\":true,\"ImageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/1afea8cd-28d8-4f55-9612-3a581a8a3a51\",\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/01e57c8a-7113-4287-8bb0-82a279b565ef\"],\"AboutOffer\":null,\"IndustryId\":null,\"OfferCategoy\":null,\"Keyword\":\"\",\"promotedCount\":null,\"IsPercentage\":true,\"IsJustOnePrice\":true,\"IsActive\":true,\"OfferDiscounts\":[{\"id\":\"2c1f16cf-186c-4523-2c5e-08dce90eff77\",\"SequenceId\":0,\"Name\":\"20% Off\",\"IsPercentage\":true,\"Amount\":25,\"OriginalValue\":\"15\",\"MaxRedeemLimit\":0}],\"IsNewFollower\":true,\"MinSpendAmount\":null,\"IsOneTime\":false,\"ValidFromTime\":null,\"ValidToTime\":null,\"ApplicableDayList\":[],\"OfferMembershipSchemes\":[],\"AvailabilityRestriction\":false}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Offer Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9,si;q=0.8,la;q=0.7"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDZlZGYxYzAtNjM3MS00MjIxLWJjMDYtZWQ5OTE4ZTA4YmFlIiwiVXNlcklkIjoiZDZlZGYxYzAtNjM3MS00MjIxLWJjMDYtZWQ5OTE4ZTA4YmFlIiwiRmlyc3ROYW1lIjoiQnVibCIsIkxhc3ROYW1lIjoiVG93biIsIkxvZ2luVHlwZSI6IjAiLCJVc2VyVHlwZSI6IkJ1YmwiLCJDbGllbnRJZCI6ImRiYjFhZTVjLWYzZjYtNDVlOC1hYjE5LTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJBZG1pbldlYiIsIkNsaWVudEFwcFR5cGUiOiJXZWIiLCJMYW5ndWFnZSI6ImVuLVVTLCBlbjsgcT0wLjksIHNpOyBxPTAuOCwgbGE7IHE9MC43IiwiQ2hhbm5lbElkIjoiNjNmMTA0YTMtYWE0Mi00MDFmLTliNzMtMWJiOGFlYjBmOGIyIiwiQ2hhbm5lbFR5cGUiOiJBbGwiLCJDaGFubmVsTmFtZSI6IkFkbWluIHdlYiBhbGwiLCJQaG9uZW51bWJlciI6Iis5NDc3NDQxMTI1MyIsIlBob25lbnVtYmVyVmVyaWZpZWQiOmZhbHNlLCJFbWFpbCI6InRlc3RhZG1pbkBnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIwYzY1ODg0ZC1jNDBkLTRhZTEtYmQ0Ny01OGExYjRkMzU2MDEiLCJPcmlnaW5OYW1lIjoiYnVibCIsIlRva2VuVHlwZSI6IkxvZ2luVG9rZW4iLCJWMiI6IlRydWUiLCJJc1N1cGVyVXNlciI6dHJ1ZSwiUm9sZSI6Ilt7XCJSb2xlSWRcIjpcImYwNjRlNDM5LTZmNjgtNGFlOC1hNDJlLTdlYmE5NzIxM2IzZFwiLFwiUm9sZU5hbWVcIjpcIkJ1YmwgQWRtaW5cIixcIk9yZ2luSWRcIjpcIjBjNjU4ODRkLWM0MGQtNGFlMS1iZDQ3LTU4YTFiNGQzNTYwMVwifV0iLCJuYmYiOjE3MTIwNTE4NjQsImV4cCI6MTc0MzU4Nzg2NCwiaXNzIjoiVUNEUCIsImF1ZCI6IkJ1YmxfdXNlcnMifQ.6E2jmkiHd457z-Ik5lFIDSWiORjlk4u_XDfJr6wPYaU"
+							},
+							{
+								"key": "origin",
+								"value": "https://devaccounts.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://devaccounts.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Catalog/v4.0/Offer?OfferId={{newfolloweroffer_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v4.0",
+								"Offer"
+							],
+							"query": [
+								{
+									"key": "OfferId",
+									"value": "{{newfolloweroffer_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Follower Offer (Percentage) Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set ('newfolloweroffer_id', jsonData.result.id);\r",
+									"\r",
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.desc).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.isPercentage).to.equal (false);\r",
+									"    pm.expect (jsonData.result.amount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.originalValue).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isOneTime).to.equal (true);\r",
+									"    pm.expect (jsonData.result.isNewFollower).to.equal (true);\r",
+									"\r",
+									"    for (var x=0 ; x<jsonData.result.categories.subCategories.length ; x++)\r",
+									"    {   pm.expect (jsonData.result.categories.subCategories[x].id).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.categories.subCategories[x].name).to.be.a (\"String\");\r",
+									"    }\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOTVkYmZkODItNmFmMi00MzE2LWE1YzEtMjI2NzUwNTM4YzhmIiwiVXNlcklkIjoiOTVkYmZkODItNmFmMi00MzE2LWE1YzEtMjI2NzUwNTM4YzhmIiwiRmlyc3ROYW1lIjoiUnV0aGloYSIsIkxhc3ROYW1lIjoiUmF2aWUiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhcGlhdXRvbWF0aW9uMzU1M0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiJkZWM3NjlkNC0wMGU4LTQ4NzItOGJlYi1hZTdmMGVlMzFmYmMiLCJPcmlnaW5OYW1lIjoiVGVlbiBmYXNoaW9uIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiZDNmMWU4NzMtYWIxNy00YjliLThmNjItODExODViYTU0NzJiXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiZGVjNzY5ZDQtMDBlOC00ODcyLThiZWItYWU3ZjBlZTMxZmJjXCJ9XSIsIkxhbmd1YWdlRGV0YWlscyI6IntcIkxhbmd1YWdlSWRcIjpcIjgyYThjZjU2LWQ0ZTktNGQzMC05ZGIxLTA4ZGM1OTUyNzE1NFwiLFwiTGFuZ3VhZ2VOYW1lXCI6XCJFbmdsaXNoXCIsXCJMYW5ndWFnZUNvZGVcIjpcImVuLUdCXCJ9IiwibmJmIjoxNzE0NDcwMTkwLCJleHAiOjE3NDYwMDYxOTAsImlzcyI6IlVDRFAiLCJhdWQiOiJCdWJsX3VzZXJzIn0.48aNRYzKwI6Iu0GuB3UwDtxHyRgmxuvMql3ckplePf0"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Type\": 4,\r\n    \"CampaignType\": 1,\r\n    \"VendorId\": \"{{vendor_id}}\",\r\n    \"HowToUse\": null,\r\n    \"Name\": \"20% Off for this Scheme\",\r\n    \"Desc\": \"This is New Follower Offer for this Stamps Scheme \",\r\n    \"UseOfferImage\": [\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/dec769d4-00e8-4872-8beb-ae7f0ee31fbc/Image/add2962a-eaf9-4b8c-b87a-e62f96dd4480\"\r\n    ],\r\n    \"UseVendorHomeImage\": true,\r\n    \"ImageUrls\": [\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/dec769d4-00e8-4872-8beb-ae7f0ee31fbc/Image/add2962a-eaf9-4b8c-b87a-e62f96dd4480\"\r\n    ],\r\n    \"AboutOffer\": null,\r\n    \"IndustryId\": \"bcd1b964-a4bf-4232-b121-fbf328929c53\",\r\n    \"OfferCategoy\": {\r\n        \"id\": \"bcd1b964-a4bf-4232-b121-fbf328929c53\",\r\n        \"name\": \"Eat & Drink\",\r\n        \"subCategories\": [\r\n            {\r\n                \"id\": \"fb485317-1cd5-43a5-bcb1-08d8d8d10936\",\r\n                \"name\": \"Breakfasts\"\r\n            },\r\n            {\r\n                \"id\": \"386b98f8-d40f-4e56-b738-08d8d9359460\",\r\n                \"name\": \"food\"\r\n            }\r\n        ]\r\n    },\r\n    \"Keyword\": \"\",\r\n    \"promotedCount\": null,\r\n    \"IsPercentage\": true,\r\n    \"IsJustOnePrice\": true,\r\n    \"IsActive\": true,\r\n    \"OfferDiscounts\": [\r\n        {\r\n            \"SequenceId\": 0,\r\n            \"Name\": \"20% Off\",\r\n            \"IsPercentage\": true,\r\n            \"Amount\": 20,\r\n            \"OriginalValue\": 15,\r\n            \"MaxRedeemLimit\": 0\r\n        }\r\n    ],\r\n    \"IsNewFollower\": true,\r\n    \"MinSpendAmount\": null,\r\n    \"IsOneTime\": false,\r\n    \"ValidFromTime\": null,\r\n    \"ValidToTime\": null,\r\n    \"ApplicableDayList\": [],\r\n    \"OfferMembershipSchemes\": [],\r\n    \"AvailabilityRestriction\": false\r\n}"
+						},
+						"url": "{{baseUrl}}/api/Catalog/v4.0/Offer"
+					},
+					"response": []
+				},
+				{
+					"name": "New Follower Offer Details Validation [Percentage] ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.desc).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.isPercentage).to.equal (false);\r",
+									"    pm.expect (jsonData.result.amount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.originalValue).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isOneTime).to.equal (true);\r",
+									"    pm.expect (jsonData.result.isNewFollower).to.equal (true);\r",
+									"\r",
+									"    for (var x=0 ; x<jsonData.result.categories.subCategories.length ; x++)\r",
+									"    {   pm.expect (jsonData.result.categories.subCategories[x].id).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.categories.subCategories[x].name).to.be.a (\"String\");\r",
+									"    }\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+							}
+						],
+						"url": "{{baseUrl}}/api/Catalog/v2.0/Offer/{{newfolloweroffer_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "EE: Update New Follower Offer [Percentage]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Id\":\"1e74f6fc-4d2b-4763-e1fb-08dd1e8fbcf2\",\"Type\":4,\"CampaignType\":1,\"VendorId\":\"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\"HowToUse\":null,\"Name\":\"20% Off for this Scheme\",\"Desc\":\"This is New Follower Offer for this Stamps Scheme\",\"UseOfferImage\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Temp/6ac02a5f-7f65-4957-ad10-ff3abcadf227\"],\"UseVendorHomeImage\":false,\"ImageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Temp/6ac02a5f-7f65-4957-ad10-ff3abcadf227\"],\"AboutOffer\":null,\"IndustryId\":null,\"OfferCategoy\":null,\"Keyword\":\"\",\"promotedCount\":null,\"IsPercentage\":true,\"IsJustOnePrice\":true,\"IsActive\":true,\"OfferDiscounts\":[{\"id\":\"b4380446-0b17-415f-1d6a-08dd1e8fbcf3\",\"SequenceId\":0,\"Name\":\"20% Off\",\"IsPercentage\":true,\"Amount\":\"20\",\"OriginalValue\":\"15\",\"MaxRedeemLimit\":0}],\"IsNewFollower\":true,\"MinSpendAmount\":null,\"IsOneTime\":false,\"ValidFromTime\":null,\"ValidToTime\":null,\"ApplicableDayList\":[],\"OfferMembershipSchemes\":[],\"AvailabilityRestriction\":false}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://uat.api.demotown.co.uk/api/Catalog/v4.0/Offer"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Retain and Grow Scheme",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"Status code is 200\", ()=>\r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result validation\", ()=> \r",
+									"{ var jsonData = pm.response.json();\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.id).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.name).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isPercentage).to.be.a (\"boolean\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.amount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isCreated).to.be.a (\"boolean\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isSelected).to.be.a (\"boolean\");\r",
+									"\r",
+									"     pm.expect( jsonData.result.id).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.updatedDate).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.minimumSpendAmount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.promotedCount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.channelId).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.stampTiers).to.be.an (\"array\");\r",
+									"     pm.expect( jsonData.result.useVendorImage).to.be.an (\"boolean\");\r",
+									"     pm.expect( jsonData.result.isError).to.equal (false);\r",
+									"})\r",
+									"\r",
+									"pm.test (\"Set the Retain and Grow id\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    let x = (jsonData.result.id);\r",
+									"    pm.environment.set ('retain_grow_id', x );\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":\"14ef1020-287f-43a0-6634-08dd1e8f4161\",\"vendorId\":\"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\"channelId\":\"2fda69d7-ed50-4640-8a2b-7774c015eeb0\",\"name\":\"\",\"imageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Temp/6ac02a5f-7f65-4957-ad10-ff3abcadf227\"],\"stampTiers\":[{\"id\":\"ac732094-0cb2-4dc7-a69f-08dd1e8f4161\",\"sequenceId\":0,\"minimumCollectStamp\":3,\"amount\":\"10\",\"stampTierType\":2,\"productName\":\"\",\"isSelected\":true,\"productImage\":\"\",\"levelName\":\"10% off\"},{\"id\":\"aef1316d-c160-44f1-a6a0-08dd1e8f4161\",\"sequenceId\":1,\"minimumCollectStamp\":5,\"amount\":\"15\",\"stampTierType\":2,\"productName\":\"\",\"isSelected\":false,\"productImage\":\"\",\"levelName\":\"15% off\"}],\"useVendorImage\":false,\"minimumSpendAmount\":\"50\",\"newFollowerPromotionReward\":{\"entityId\":\"1e74f6fc-4d2b-4763-e1fb-08dd1e8fbcf2\",\"followerRewardType\":2,\"rewardSequenceId\":0}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://uat.api.demotown.co.uk/api/Catalog/v4/Stamp",
+						"description": "Generated from cURL: curl 'https://uat.api.demotown.co.uk/api/Catalog/v4/Stamp' \\\r\n  -H 'accept: application/json, text/plain, */*' \\\r\n  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiVXNlcklkIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiRmlyc3ROYW1lIjoiSnVzdGluIiwiTGFzdE5hbWUiOiJBaml0aCIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJCdWJsIiwiQ2xpZW50SWQiOiJkYmIxYWU1Yy1mM2Y2LTQ1ZTgtYWIxOS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiQWRtaW5XZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1HQiwgZW4tVVM7IHE9MC45LCBlbjsgcT0wLjgiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiQ2hhbm5lbE5hbWUiOiJwb2RkbGUiLCJQaG9uZW51bWJlciI6IiIsIlBob25lbnVtYmVyVmVyaWZpZWQiOmZhbHNlLCJFbWFpbCI6Imp1c3RpbmFqaXRoMDhAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiMGM2NTg4NGQtYzQwZC00YWUxLWJkNDctNThhMWI0ZDM1NjAxIiwiT3JpZ2luTmFtZSI6ImJ1YmwiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJmMDY0ZTQzOS02ZjY4LTRhZTgtYTQyZS03ZWJhOTcyMTNiM2RcIixcIlJvbGVOYW1lXCI6XCJCdWJsIEFkbWluXCIsXCJPcmdpbklkXCI6XCIwYzY1ODg0ZC1jNDBkLTRhZTEtYmQ0Ny01OGExYjRkMzU2MDFcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MjcwNzE2MzUsImV4cCI6MTc1ODYwNzYzNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.8ycY-95xK_vPjIhyezyPguvz6UA-EX56YO7tPwW-F-Y' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://admin.poddleuat.demotown.co.uk' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://admin.poddleuat.demotown.co.uk/' \\\r\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-site' \\\r\n  -H 'timezone: +1' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"vendorId\":\"50cdf83c-82be-4031-a249-b7b675a0984c\",\"channelId\":\"2fda69d7-ed50-4640-8a2b-7774c015eeb0\",\"name\":\"\",\"imageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/1afea8cd-28d8-4f55-9612-3a581a8a3a51\",\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/01e57c8a-7113-4287-8bb0-82a279b565ef\"],\"stampTiers\":[{\"id\":null,\"sequenceId\":0,\"minimumCollectStamp\":7,\"amount\":\"20\",\"stampTierType\":2,\"productName\":\"\",\"isSelected\":true,\"productImage\":\"\",\"levelName\":\"20% off\"}],\"useVendorImage\":true,\"minimumSpendAmount\":5,\"newFollowerPromotionReward\":{\"entityId\":\"34b81267-1772-4eec-f831-08dce90eff76\",\"followerRewardType\":2,\"rewardSequenceId\":0}}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Stamps Details Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result validation\", ()=> \r",
+									"{ var jsonData = pm.response.json();\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.id).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.name).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isPercentage).to.be.a (\"boolean\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.amount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isCreated).to.be.a (\"boolean\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isSelected).to.be.a (\"boolean\");\r",
+									"\r",
+									"     pm.expect( jsonData.result.id).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.updatedDate).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.minimumSpendAmount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.promotedCount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.channelId).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.stampTiers).to.be.an (\"array\");\r",
+									"     pm.expect( jsonData.result.useVendorImage).to.be.an (\"boolean\");\r",
+									"     pm.expect( jsonData.result.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+							}
+						],
+						"url": "{{baseUrl}}/api/Catalog/v4/Stamp/{{retain_grow_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Retain and Grow Scheme",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result validation\", ()=> \r",
+									"{ var jsonData = pm.response.json();\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.id).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.name).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isPercentage).to.be.a (\"boolean\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.amount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isCreated).to.be.a (\"boolean\");\r",
+									"     pm.expect( jsonData.result.newFollowerPromotionReward.newFollowerOffer.isSelected).to.be.a (\"boolean\");\r",
+									"\r",
+									"     pm.expect( jsonData.result.id).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.updatedDate).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.minimumSpendAmount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.promotedCount).to.be.a (\"number\");\r",
+									"     pm.expect( jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.channelId).to.be.a (\"String\");\r",
+									"     pm.expect( jsonData.result.stampTiers).to.be.an (\"array\");\r",
+									"     pm.expect( jsonData.result.useVendorImage).to.be.an (\"boolean\");\r",
+									"     pm.expect( jsonData.result.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":\"14ef1020-287f-43a0-6634-08dd1e8f4161\",\"vendorId\":\"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\"channelId\":\"2fda69d7-ed50-4640-8a2b-7774c015eeb0\",\"name\":\"\",\"imageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Temp/02aa977b-6e01-4e75-abb1-b6da36d087a3\"],\"stampTiers\":[{\"id\":\"0a4d494e-21b7-4659-b5ce-08dd1e936b28\",\"sequenceId\":0,\"minimumCollectStamp\":3,\"amount\":\"10\",\"stampTierType\":2,\"productName\":\"\",\"isSelected\":true,\"productImage\":\"\",\"levelName\":\"10% off\"},{\"id\":\"0dc44a27-c5af-4c3f-b5cf-08dd1e936b28\",\"sequenceId\":1,\"minimumCollectStamp\":5,\"amount\":\"15\",\"stampTierType\":2,\"productName\":\"\",\"isSelected\":false,\"productImage\":\"\",\"levelName\":\"15% off\"}],\"useVendorImage\":false,\"minimumSpendAmount\":\"60\",\"newFollowerPromotionReward\":{\"entityId\":\"0dc44a27-c5af-4c3f-b5cf-08dd1e936b28\",\"followerRewardType\":1,\"rewardSequenceId\":1}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://uat.api.demotown.co.uk/api/Catalog/v4/Stamp",
+						"description": "Generated from cURL: curl 'https://uat.api.demotown.co.uk/api/Catalog/v4/Stamp' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: application/json, text/plain, */*' \\\r\n  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiVXNlcklkIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiRmlyc3ROYW1lIjoiSnVzdGluIiwiTGFzdE5hbWUiOiJBaml0aCIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJCdWJsIiwiQ2xpZW50SWQiOiJkYmIxYWU1Yy1mM2Y2LTQ1ZTgtYWIxOS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiQWRtaW5XZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1HQiwgZW4tVVM7IHE9MC45LCBlbjsgcT0wLjgiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiQ2hhbm5lbE5hbWUiOiJwb2RkbGUiLCJQaG9uZW51bWJlciI6IiIsIlBob25lbnVtYmVyVmVyaWZpZWQiOmZhbHNlLCJFbWFpbCI6Imp1c3RpbmFqaXRoMDhAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiMGM2NTg4NGQtYzQwZC00YWUxLWJkNDctNThhMWI0ZDM1NjAxIiwiT3JpZ2luTmFtZSI6ImJ1YmwiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJmMDY0ZTQzOS02ZjY4LTRhZTgtYTQyZS03ZWJhOTcyMTNiM2RcIixcIlJvbGVOYW1lXCI6XCJCdWJsIEFkbWluXCIsXCJPcmdpbklkXCI6XCIwYzY1ODg0ZC1jNDBkLTRhZTEtYmQ0Ny01OGExYjRkMzU2MDFcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MjcwNzE2MzUsImV4cCI6MTc1ODYwNzYzNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.8ycY-95xK_vPjIhyezyPguvz6UA-EX56YO7tPwW-F-Y' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://admin.poddleuat.demotown.co.uk' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://admin.poddleuat.demotown.co.uk/' \\\r\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-site' \\\r\n  -H 'timezone: +1' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"id\":\"11c199bb-dec1-402a-7890-08dce90a6ff7\",\"vendorId\":\"50cdf83c-82be-4031-a249-b7b675a0984c\",\"channelId\":\"2fda69d7-ed50-4640-8a2b-7774c015eeb0\",\"name\":\"\",\"imageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/01e57c8a-7113-4287-8bb0-82a279b565ef\",\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/1afea8cd-28d8-4f55-9612-3a581a8a3a51\"],\"stampTiers\":[{\"id\":\"953bd723-9209-4e73-c99e-08dce90a6ff7\",\"sequenceId\":0,\"minimumCollectStamp\":7,\"amount\":\"20\",\"stampTierType\":2,\"productName\":\"\",\"isSelected\":true,\"productImage\":\"\",\"levelName\":\"20% off\"}],\"useVendorImage\":true,\"minimumSpendAmount\":3,\"newFollowerPromotionReward\":{\"entityId\":\"e28addca-4ebe-4505-d3d8-08dce909f6ae\",\"followerRewardType\":2,\"rewardSequenceId\":0}}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Promotion Pop up Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (10000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"\r",
+									"    // an existing reward properties validation \r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.channelId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.entityId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.promoteTargetType).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.logs).to.be.an (\"array\");\r",
+									"\r",
+									"    for ( var x=0 ; x<jsonData.result.logs.length; x++)\r",
+									"    {   pm.expect (jsonData.result.logs[x].promoteId).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].socialMediaType).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].socialMediaName).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].deepLink).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].clicksCount).to.be.a (\"number\"); \r",
+									"        pm.expect (jsonData.result.logs[x].isActive).to.equal (true); \r",
+									"        pm.expect (jsonData.result.logs[x].id).to.be.a (\"String\");\r",
+									"    }\r",
+									"\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Industry/v4/Promotes/get-promote-deeplink?ChannelId={{channel_id}}&PathType=14&EntityId={{retain_grow_id}}&SocialEnabled=true&SocialTitle=&SocialDescription=&SocialImageLink=&referenceId={{retain_grow_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Industry",
+								"v4",
+								"Promotes",
+								"get-promote-deeplink"
+							],
+							"query": [
+								{
+									"key": "ChannelId",
+									"value": "{{channel_id}}"
+								},
+								{
+									"key": "PathType",
+									"value": "14"
+								},
+								{
+									"key": "EntityId",
+									"value": "{{retain_grow_id}}"
+								},
+								{
+									"key": "SocialEnabled",
+									"value": "true"
+								},
+								{
+									"key": "SocialTitle",
+									"value": ""
+								},
+								{
+									"key": "SocialDescription",
+									"value": ""
+								},
+								{
+									"key": "SocialImageLink",
+									"value": ""
+								},
+								{
+									"key": "referenceId",
+									"value": "{{retain_grow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retain and Grow Scheme Delete API  Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiM2M3ZjgwZjQtOWNjMi00NWY2LWE2NzYtNGI1NmNmMDVjZjllIiwiVXNlcklkIjoiM2M3ZjgwZjQtOWNjMi00NWY2LWE2NzYtNGI1NmNmMDVjZjllIiwiRmlyc3ROYW1lIjoiRGlsYXgiLCJMYXN0TmFtZSI6IkQiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tVVMsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6ImVlMGEyZDRhLTQyMTMtNGU3Ny1hMjgzLWY4NWJhYjhlYzFiNCIsIkNoYW5uZWxUeXBlIjoiQWxsIiwiQ2hhbm5lbE5hbWUiOiJWZW5kb3Igd2ViIEFsbCIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoiamVoaXIzNTgwOEBrYXVkYXQuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZGU0MmFhNTItNzZkMS00NDU5LWIyZjktMDhkYjI5ZDVhMzkyIiwiT3JpZ2luTmFtZSI6Ik1heXUgU2hvcCIsIlRva2VuVHlwZSI6IkxvZ2luVG9rZW4iLCJWMiI6IlRydWUiLCJJc1N1cGVyVXNlciI6dHJ1ZSwiUm9sZSI6Ilt7XCJSb2xlSWRcIjpcIjU4NzQyNmNmLTVhMGMtNDRiMy05YzY0LWFkYjkyYWY5YzBmNlwiLFwiUm9sZU5hbWVcIjpcIlN1cGVyIFVzZXJcIixcIk9yZ2luSWRcIjpcImRlNDJhYTUyLTc2ZDEtNDQ1OS1iMmY5LTA4ZGIyOWQ1YTM5MlwifV0iLCJuYmYiOjE2OTU4MjY3NTYsImV4cCI6MTcyNzM2Mjc1NiwiaXNzIjoiVUNEUCIsImF1ZCI6IkJ1YmxfdXNlcnMifQ.tG1l6_Hr6_AfeEOd4ATaYMTp6JZS9Uia5GTLfVepOMI"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Catalog/v4/Stamp?stampId={{retain_grow_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v4",
+								"Stamp"
+							],
+							"query": [
+								{
+									"key": "stampId",
+									"value": "{{retain_grow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cash Credit",
+			"item": [
+				{
+					"name": "Retain and Grow Form Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('status code is 200', () => {",
+									"    pm.response.to.have.status(200); })",
+									"",
+									"pm.test('Status code is not 500', () => {",
+									"    pm.response.to.not.have.status(500); })",
+									"",
+									"pm.test('Verify the Response Time', () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000); })",
+									"",
+									"pm.test(\"Result Validation\", () => {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.result.stampReward).to.be.an('array');",
+									"    pm.expect(jsonData.result.newFollowerOffer.isCreated).to.equal (false);",
+									"    pm.expect(jsonData.result.newFollowerOffer.isSelected).to.equal (false);",
+									"    pm.expect(jsonData.result.cashCredit.isCreated).to.equal (false);",
+									"    pm.expect(jsonData.result.cashCredit.isSelected).to.equal (false);",
+									"    pm.expect(jsonData.result.selectNewFollowerRewardType).to.be.a(\"number\");",
+									"    pm.expect(jsonData.isError).to.equal (false);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Catalog/v4/Stamp/NewFollowerPromotion?vendorId={{vendor_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v4",
+								"Stamp",
+								"NewFollowerPromotion"
+							],
+							"query": [
+								{
+									"key": "vendorId",
+									"value": "{{vendor_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Upload",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.baseImage).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "File",
+									"type": "file",
+									"src": "/C:/Users/Admin/Downloads/images.jpg"
+								}
+							]
+						},
+						"url": "{{baseUrl}}/api/Industry/v1.1/Industry/Image"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Reward",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set ('reward_id', jsonData.result.id);\r",
+									"\r",
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.expectedFollowersCount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.individualCustomerAmount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.maximumBudget).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.rewardLeadDays).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// var requestbody = pm.request.body;\r",
+									"// var expectedFollowersCount = (requestbody.expectedFollowersCount);\r",
+									"// var individualCustomerAmount = (requestbody.individualCustomerAmount);\r",
+									"// var maximumBudget = (expectedFollowersCount * individualCustomerAmount);\r",
+									"// pm.environment.set ('maximumBudget',maximumBudget);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "{{token}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Good reward\",\r\n    \"channelId\": \"{{channel_id}}\",\r\n    \"vendorId\": \"{{vendor_id}}\",\r\n    \"expectedFollowersCount\": 10,\r\n    \"individualCustomerAmount\": 5,\r\n    \"maximumBudget\": 50,\r\n    \"rewardLeadDays\": 5\r\n}"
+						},
+						"url": "{{baseUrl}}/api/Catalog/v4/reward"
+					},
+					"response": []
+				},
+				{
+					"name": "Reward Update ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.expectedFollowersCount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.individualCustomerAmount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.maximumBudget).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.rewardLeadDays).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// var requestbody = pm.request.body;\r",
+									"// var expectedFollowersCount = requestbody.expectedFollowersCount;\r",
+									"// var individualCustomerAmount = requestbody.individualCustomerAmount;\r",
+									"// var maximumBudget = (expectedFollowersCount * individualCustomerAmount);\r",
+									"// pm.environment.set ('update_maximumBudget', maximumBudget);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{reward_id}}\",\r\n    \"name\": \"Subscribing Reward \",\r\n    \"channelId\": \"{{channel_id}}\",\r\n    \"vendorId\": \"{{vendor_id}}\",\r\n    \"expectedFollowersCount\": 20,\r\n    \"individualCustomerAmount\": 10,\r\n    \"maximumBudget\": 10,\r\n    \"rewardLeadDays\": 2\r\n}"
+						},
+						"url": "{{baseUrl}}/api/Catalog/v4/Reward"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Stamp With Cash Credit ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set('retain_grow_id', jsonData.result.id);",
+									"for (var z = 0; z < jsonData.result.stampTiers.length; z++) {",
+									"    pm.environment.set('stamptiers_id0', jsonData.result.stampTiers[0].id);",
+									"    if ( pm.expect (jsonData.result.stampTiers[1].id).to.be.a (\"String\"))",
+									"    { pm.environment.set('stamptiers_id1', jsonData.result.stampTiers[1].id); }",
+									"    // if (jsonData.result.stampTiers[2].id !== \"\")",
+									"    // {pm.environment.set('stamptiers_id2', jsonData.result.stampTiers[2].id);}",
+									"    // else ",
+									"    // { pm.expect (jsonData.result.stampTiers[z].id).to.be.a (\"String\");}",
+									"}",
+									"",
+									"pm.test(\"status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Status code is not 500\", () => {",
+									"    pm.response.to.not.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Verify the Response Time\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});",
+									"",
+									"pm.test(\"Result Validation\", () => {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.id).to.be.a(\"String\");",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.name).to.be.a(\"String\");",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.amount).to.be.a(\"number\");",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.isCreated).to.be.a(\"boolean\");",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.isSelected).to.be.a(\"boolean\");",
+									"",
+									"    pm.expect(jsonData.result.id).to.be.a(\"String\");",
+									"    pm.expect(jsonData.result.minimumSpendAmount).to.be.a(\"number\");",
+									"    pm.expect(jsonData.result.isActive).to.be.a(\"boolean\");",
+									"    pm.expect(jsonData.result.vendorId).to.be.a(\"String\");",
+									"    pm.expect(jsonData.result.channelId).to.be.a(\"String\");",
+									"    pm.expect(jsonData.result.stampTiers).to.be.an(\"array\");",
+									"",
+									"    for (var x = 0; x < jsonData.result.stampTiers.length; x++) {",
+									"        pm.expect(jsonData.result.stampTiers[x].sequenceId).to.be.a(\"number\");",
+									"        pm.expect(jsonData.result.stampTiers[x].minimumCollectStamp).to.be.a(\"number\");",
+									"        pm.expect(jsonData.result.stampTiers[x].productName).to.be.a(\"String\");",
+									"        pm.expect(jsonData.result.stampTiers[x].id).to.be.a(\"String\");",
+									"        pm.expect(jsonData.result.stampTiers[x].stampTierType).to.be.a(\"number\");",
+									"        pm.expect(jsonData.result.stampTiers[x].amount).to.be.a(\"number\");",
+									"    }",
+									"",
+									"    pm.expect(jsonData.isError).to.equal(false);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vendorId\": \"{{vendor_id}}\",\r\n    \"channelId\": \"{{channel_id}}\",\r\n    \"name\": \"\",\r\n    \"imageUrls\": [\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/87fec3b1-521b-4814-bab0-712b164cce08\",\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/19b7df4d-7466-45e0-8c43-78174aed5933\",\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/626230ff-93cf-4edd-8d78-2921c9396570\"\r\n    ],\r\n    \"stampTiers\": [\r\n        {\r\n            \"id\": null,\r\n            \"sequenceId\": 0,\r\n            \"minimumCollectStamp\": 5,\r\n            \"amount\": 50,\r\n            \"stampTierType\": 1,\r\n            \"productName\": \"\",\r\n            \"isSelected\": true,\r\n            \"productImage\": \"\",\r\n            \"levelName\": \"£10 off next purchase\"\r\n        },\r\n        {\r\n            \"id\": null,\r\n            \"sequenceId\": 1,\r\n            \"minimumCollectStamp\": 6,\r\n            \"amount\": 51,\r\n            \"stampTierType\": 1,\r\n            \"productName\": \"\",\r\n            \"isSelected\": false,\r\n            \"productImage\": \"\",\r\n            \"levelName\": \"£15 off next purchase\"\r\n        }\r\n    ],\r\n    \"useVendorImage\": true,\r\n    \"minimumSpendAmount\": 10,\r\n    \"newFollowerPromotionReward\": {\r\n        \"entityId\": \"{{reward_id}}\",\r\n        \"followerRewardType\": 3,\r\n        \"rewardSequenceId\": 0\r\n    }\r\n}"
+						},
+						"url": "{{baseUrl}}/api/Catalog/v4/Stamp"
+					},
+					"response": []
+				},
+				{
+					"name": "Stamps Details Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.cashCredit.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.cashCredit.name).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.cashCredit.amount).to.be.a (\"number\"); \r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.cashCredit.isCreated).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.newFollowerPromotionReward.cashCredit.isSelected).to.be.a (\"boolean\");\r",
+									"\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.minimumSpendAmount).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.channelId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.stampTiers).to.be.an (\"array\");\r",
+									"    \r",
+									"    for ( var x=0 ; x<jsonData.result.stampTiers.length ; x++)\r",
+									"    { pm.expect (jsonData.result.stampTiers[x].sequenceId).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.stampTiers[x].minimumCollectStamp).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.stampTiers[x].productName).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.stampTiers[x].id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.stampTiers[x].stampTierType).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.stampTiers[x].amount).to.be.a (\"number\");\r",
+									"    }\r",
+									"\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"url": "{{baseUrl}}/api/Catalog/v4/Stamp/{{retain_grow_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Promote Pop up Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{   var jsonData = pm.response.json();\r",
+									"\r",
+									"    // an existing reward properties validation \r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.channelId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.entityId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.promoteTargetType).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.logs).to.be.an (\"array\");\r",
+									"\r",
+									"    for ( var x=0 ; x<jsonData.result.logs.length; x++)\r",
+									"    {   pm.expect (jsonData.result.logs[x].promoteId).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].socialMediaType).to.be.a (\"number\"); \r",
+									"        pm.expect (jsonData.result.logs[x].socialMediaName).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].deepLink).to.be.a (\"String\"); \r",
+									"        pm.expect (jsonData.result.logs[x].clicksCount).to.be.a (\"number\"); \r",
+									"        pm.expect (jsonData.result.logs[x].isActive).to.equal (true); \r",
+									"        pm.expect (jsonData.result.logs[x].id).to.be.a (\"String\");\r",
+									"    }\r",
+									"\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?1"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Android\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Industry/v4/Promotes/get-promote-deeplink?ChannelId=2fda69d7-ed50-4640-8a2b-7774c015eeb0&PathType=14&EntityId=6d652ba8-0c3b-4176-6f8e-08dc6441d1dc&SocialEnabled=true&SocialTitle=&SocialDescription=&SocialImageLink=&referenceId=9cab46b1-6060-437a-84e3-34a02699b1ec",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Industry",
+								"v4",
+								"Promotes",
+								"get-promote-deeplink"
+							],
+							"query": [
+								{
+									"key": "ChannelId",
+									"value": "2fda69d7-ed50-4640-8a2b-7774c015eeb0"
+								},
+								{
+									"key": "PathType",
+									"value": "14"
+								},
+								{
+									"key": "EntityId",
+									"value": "6d652ba8-0c3b-4176-6f8e-08dc6441d1dc"
+								},
+								{
+									"key": "SocialEnabled",
+									"value": "true"
+								},
+								{
+									"key": "SocialTitle",
+									"value": ""
+								},
+								{
+									"key": "SocialDescription",
+									"value": ""
+								},
+								{
+									"key": "SocialImageLink",
+									"value": ""
+								},
+								{
+									"key": "referenceId",
+									"value": "9cab46b1-6060-437a-84e3-34a02699b1ec"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Retain and Grow Scheme",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is not 500\", () => {\r",
+									"    pm.response.to.not.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify the Response Time\", () => {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result Validation\", () => {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.id).to.be.a(\"String\");\r",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.name).to.be.a(\"String\");\r",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.amount).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.isCreated).to.be.a(\"boolean\");\r",
+									"    pm.expect(jsonData.result.newFollowerPromotionReward.cashCredit.isSelected).to.be.a(\"boolean\");\r",
+									"\r",
+									"    pm.expect(jsonData.result.id).to.be.a(\"String\");\r",
+									"    pm.expect(jsonData.result.minimumSpendAmount).to.be.a(\"number\");\r",
+									"    pm.expect(jsonData.result.isActive).to.be.a(\"boolean\");\r",
+									"    pm.expect(jsonData.result.vendorId).to.be.a(\"String\");\r",
+									"    pm.expect(jsonData.result.channelId).to.be.a(\"String\");\r",
+									"    pm.expect(jsonData.result.stampTiers).to.be.an(\"array\");\r",
+									"\r",
+									"    for (var x = 0; x < jsonData.result.stampTiers.length; x++) {\r",
+									"        pm.expect(jsonData.result.stampTiers[x].sequenceId).to.be.a(\"number\");\r",
+									"        pm.expect(jsonData.result.stampTiers[x].minimumCollectStamp).to.be.a(\"number\");\r",
+									"        pm.expect(jsonData.result.stampTiers[x].productName).to.be.a(\"String\");\r",
+									"        pm.expect(jsonData.result.stampTiers[x].id).to.be.a(\"String\");\r",
+									"        pm.expect(jsonData.result.stampTiers[x].stampTierType).to.be.a(\"number\");\r",
+									"        pm.expect(jsonData.result.stampTiers[x].amount).to.be.a(\"number\");\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(jsonData.isError).to.equal(false);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-GB,en-US;q=0.9,en;q=0.8"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.owlocal.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.owlocal.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "cross-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{retain_grow_id}}\",\r\n    \"vendorId\": \"{{vendor_id}}\",\r\n    \"channelId\": \"{{channel_id}}\",\r\n    \"name\": \"\",\r\n    \"imageUrls\": [\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/626230ff-93cf-4edd-8d78-2921c9396570\",\r\n        \"https://bubltowndevstorage.blob.core.windows.net/bubl/Vendor/9cab46b1-6060-437a-84e3-34a02699b1ec/Image/19b7df4d-7466-45e0-8c43-78174aed5933\"\r\n    ],\r\n    \"stampTiers\": [\r\n        {\r\n            \"id\": \"{{stamptiers_id0}}\",\r\n            \"sequenceId\": 0,\r\n            \"minimumCollectStamp\": 5,\r\n            \"amount\": 50,\r\n            \"stampTierType\": 1,\r\n            \"productName\": \"\",\r\n            \"isSelected\": true,\r\n            \"productImage\": \"\",\r\n            \"levelName\": \"£50 off next purchase\"\r\n        },\r\n        {\r\n            \"id\": \"{{stamptiers_id1}}\",\r\n            \"sequenceId\": 1,\r\n            \"minimumCollectStamp\": 6,\r\n            \"amount\": 51,\r\n            \"stampTierType\": 1,\r\n            \"productName\": \"\",\r\n            \"isSelected\": false,\r\n            \"productImage\": \"\",\r\n            \"levelName\": \"£51 off next purchase\"\r\n        }\r\n    ],\r\n    \"useVendorImage\": true,\r\n    \"minimumSpendAmount\": 10,\r\n    \"newFollowerPromotionReward\": {\r\n        \"entityId\": \"{{reward_id}}\",\r\n        \"followerRewardType\": 3,\r\n        \"rewardSequenceId\": 0\r\n    }\r\n}"
+						},
+						"url": "{{baseUrl}}/api/Catalog/v4/Stamp"
+					},
+					"response": []
+				},
+				{
+					"name": "Reward delete API",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMmVjYjAxODgtN2NiYy00MTU2LTg5YzEtMzIxYTcxYmM0OWIxIiwiVXNlcklkIjoiMmVjYjAxODgtN2NiYy00MTU2LTg5YzEtMzIxYTcxYmM0OWIxIiwiRmlyc3ROYW1lIjoiVmlub2phIiwiTGFzdE5hbWUiOiJSYXNhc3VudGhhcmFtIiwiTG9naW5UeXBlIjoiRW1haWwiLCJVc2VyVHlwZSI6IkJ1YmwiLCJDbGllbnRJZCI6ImRiYjFhZTVjLWYzZjYtNDVlOC1hYjE5LTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJBZG1pbldlYiIsIkNsaWVudEFwcFR5cGUiOiJXZWIiLCJMYW5ndWFnZSI6ImVuLUdCLCBlbi1VUzsgcT0wLjksIGVuOyBxPTAuOCIsIkNoYW5uZWxJZCI6IjYzZjEwNGEzLWFhNDItNDAxZi05YjczLTFiYjhhZWIwZjhiMiIsIkNoYW5uZWxUeXBlIjoiQWxsIiwiQ2hhbm5lbE5hbWUiOiJBZG1pbiB3ZWIgYWxsIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ2cmFzYXN1bnRoYXJhbUBnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIwYzY1ODg0ZC1jNDBkLTRhZTEtYmQ0Ny01OGExYjRkMzU2MDEiLCJPcmlnaW5OYW1lIjoiYnVibCIsIlRva2VuVHlwZSI6IkxvZ2luVG9rZW4iLCJWMiI6IlRydWUiLCJJc1N1cGVyVXNlciI6dHJ1ZSwiUm9sZSI6Ilt7XCJSb2xlSWRcIjpcImYwNjRlNDM5LTZmNjgtNGFlOC1hNDJlLTdlYmE5NzIxM2IzZFwiLFwiUm9sZU5hbWVcIjpcIkJ1YmwgQWRtaW5cIixcIk9yZ2luSWRcIjpcIjBjNjU4ODRkLWM0MGQtNGFlMS1iZDQ3LTU4YTFiNGQzNTYwMVwifV0iLCJuYmYiOjE3MTAzOTUyMzcsImV4cCI6MTc0MTkzMTIzNywiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19qVnB4Zm1KNlgwRUQyZWk5VlpDWjMwMGRHbEQ3UzVlWDl0WFZHdUFyRFprcGRNMmpmR2NIQUs4bjdJUTNvMzB0In0.n5Ioba6ieZeXnTE5DOTHeeOPZN7-oltqwBJdKxCyO6Y"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Catalog/v4/Reward?rewardId={{reward_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v4",
+								"Reward"
+							],
+							"query": [
+								{
+									"key": "rewardId",
+									"value": "{{reward_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retain and Grow Scheme Delete API  Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"status code is 200\", ()=> \r",
+									"{ pm.response.to.have.status (200); })\r",
+									"\r",
+									"pm.test (\"Status code is not 500\", ()=>\r",
+									"{pm.response.to.not.have.status (500);})\r",
+									"\r",
+									"pm.test (\"Verify the Response Time\", ()=>\r",
+									"{pm.expect (pm.response.responseTime).to.be.below (3000);})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiM2M3ZjgwZjQtOWNjMi00NWY2LWE2NzYtNGI1NmNmMDVjZjllIiwiVXNlcklkIjoiM2M3ZjgwZjQtOWNjMi00NWY2LWE2NzYtNGI1NmNmMDVjZjllIiwiRmlyc3ROYW1lIjoiRGlsYXgiLCJMYXN0TmFtZSI6IkQiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tVVMsIGVuOyBxPTAuOSIsIkNoYW5uZWxJZCI6ImVlMGEyZDRhLTQyMTMtNGU3Ny1hMjgzLWY4NWJhYjhlYzFiNCIsIkNoYW5uZWxUeXBlIjoiQWxsIiwiQ2hhbm5lbE5hbWUiOiJWZW5kb3Igd2ViIEFsbCIsIlBob25lbnVtYmVyIjoiIiwiUGhvbmVudW1iZXJWZXJpZmllZCI6ZmFsc2UsIkVtYWlsIjoiamVoaXIzNTgwOEBrYXVkYXQuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiZGU0MmFhNTItNzZkMS00NDU5LWIyZjktMDhkYjI5ZDVhMzkyIiwiT3JpZ2luTmFtZSI6Ik1heXUgU2hvcCIsIlRva2VuVHlwZSI6IkxvZ2luVG9rZW4iLCJWMiI6IlRydWUiLCJJc1N1cGVyVXNlciI6dHJ1ZSwiUm9sZSI6Ilt7XCJSb2xlSWRcIjpcIjU4NzQyNmNmLTVhMGMtNDRiMy05YzY0LWFkYjkyYWY5YzBmNlwiLFwiUm9sZU5hbWVcIjpcIlN1cGVyIFVzZXJcIixcIk9yZ2luSWRcIjpcImRlNDJhYTUyLTc2ZDEtNDQ1OS1iMmY5LTA4ZGIyOWQ1YTM5MlwifV0iLCJuYmYiOjE2OTU4MjY3NTYsImV4cCI6MTcyNzM2Mjc1NiwiaXNzIjoiVUNEUCIsImF1ZCI6IkJ1YmxfdXNlcnMifQ.tG1l6_Hr6_AfeEOd4ATaYMTp6JZS9Uia5GTLfVepOMI"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Catalog/v4/Stamp?stampId={{retain_grow_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v4",
+								"Stamp"
+							],
+							"query": [
+								{
+									"key": "stampId",
+									"value": "{{retain_grow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "https://uat.api.demotown.co.uk/api/Catalog/v4.0/Offer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiVXNlcklkIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiRmlyc3ROYW1lIjoiSnVzdGluIiwiTGFzdE5hbWUiOiJBaml0aCIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJCdWJsIiwiQ2xpZW50SWQiOiJkYmIxYWU1Yy1mM2Y2LTQ1ZTgtYWIxOS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiQWRtaW5XZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1HQiwgZW4tVVM7IHE9MC45LCBlbjsgcT0wLjgiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiQ2hhbm5lbE5hbWUiOiJwb2RkbGUiLCJQaG9uZW51bWJlciI6IiIsIlBob25lbnVtYmVyVmVyaWZpZWQiOmZhbHNlLCJFbWFpbCI6Imp1c3RpbmFqaXRoMDhAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiMGM2NTg4NGQtYzQwZC00YWUxLWJkNDctNThhMWI0ZDM1NjAxIiwiT3JpZ2luTmFtZSI6ImJ1YmwiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJmMDY0ZTQzOS02ZjY4LTRhZTgtYTQyZS03ZWJhOTcyMTNiM2RcIixcIlJvbGVOYW1lXCI6XCJCdWJsIEFkbWluXCIsXCJPcmdpbklkXCI6XCIwYzY1ODg0ZC1jNDBkLTRhZTEtYmQ0Ny01OGExYjRkMzU2MDFcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MjcwNzE2MzUsImV4cCI6MTc1ODYwNzYzNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.8ycY-95xK_vPjIhyezyPguvz6UA-EX56YO7tPwW-F-Y"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://admin.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://admin.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Id\":\"5577d47e-1d73-406f-d3da-08dce909f6ae\",\"Type\":4,\"CampaignType\":1,\"VendorId\":\"50cdf83c-82be-4031-a249-b7b675a0984c\",\"HowToUse\":null,\"Name\":\"Supreme Off [New Follower]\",\"Desc\":\"New follower offer of tara shine\",\"UseOfferImage\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/1afea8cd-28d8-4f55-9612-3a581a8a3a51\",\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/01e57c8a-7113-4287-8bb0-82a279b565ef\"],\"UseVendorHomeImage\":true,\"ImageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/1afea8cd-28d8-4f55-9612-3a581a8a3a51\",\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/01e57c8a-7113-4287-8bb0-82a279b565ef\"],\"AboutOffer\":null,\"IndustryId\":null,\"OfferCategoy\":null,\"Keyword\":\"\",\"promotedCount\":null,\"IsPercentage\":true,\"IsJustOnePrice\":true,\"IsActive\":true,\"OfferDiscounts\":[{\"id\":\"891bd479-81be-470b-0895-08dce909f6af\",\"SequenceId\":0,\"Name\":\"deal 01\",\"IsPercentage\":true,\"Amount\":25,\"OriginalValue\":\"10\",\"MaxRedeemLimit\":0}],\"IsNewFollower\":true,\"MinSpendAmount\":null,\"IsOneTime\":false,\"ValidFromTime\":null,\"ValidToTime\":null,\"ApplicableDayList\":[],\"OfferMembershipSchemes\":[],\"AvailabilityRestriction\":false}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://uat.api.demotown.co.uk/api/Catalog/v4.0/Offer",
+				"description": "Generated from cURL: curl 'https://uat.api.demotown.co.uk/api/Catalog/v4.0/Offer' \\\r\n  -X 'PUT' \\\r\n  -H 'accept: application/json, text/plain, */*' \\\r\n  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \\\r\n  -H 'authorization: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiVXNlcklkIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiRmlyc3ROYW1lIjoiSnVzdGluIiwiTGFzdE5hbWUiOiJBaml0aCIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJCdWJsIiwiQ2xpZW50SWQiOiJkYmIxYWU1Yy1mM2Y2LTQ1ZTgtYWIxOS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiQWRtaW5XZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1HQiwgZW4tVVM7IHE9MC45LCBlbjsgcT0wLjgiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiQ2hhbm5lbE5hbWUiOiJwb2RkbGUiLCJQaG9uZW51bWJlciI6IiIsIlBob25lbnVtYmVyVmVyaWZpZWQiOmZhbHNlLCJFbWFpbCI6Imp1c3RpbmFqaXRoMDhAZ21haWwuY29tIiwiVHdvZmFjdG9yRW5hYmxlZCI6ZmFsc2UsIk9yaWdpbklkIjoiMGM2NTg4NGQtYzQwZC00YWUxLWJkNDctNThhMWI0ZDM1NjAxIiwiT3JpZ2luTmFtZSI6ImJ1YmwiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCJmMDY0ZTQzOS02ZjY4LTRhZTgtYTQyZS03ZWJhOTcyMTNiM2RcIixcIlJvbGVOYW1lXCI6XCJCdWJsIEFkbWluXCIsXCJPcmdpbklkXCI6XCIwYzY1ODg0ZC1jNDBkLTRhZTEtYmQ0Ny01OGExYjRkMzU2MDFcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MjcwNzE2MzUsImV4cCI6MTc1ODYwNzYzNSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.8ycY-95xK_vPjIhyezyPguvz6UA-EX56YO7tPwW-F-Y' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'origin: https://admin.poddleuat.demotown.co.uk' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://admin.poddleuat.demotown.co.uk/' \\\r\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-site' \\\r\n  -H 'timezone: +1' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36' \\\r\n  --data-raw '{\"Id\":\"5577d47e-1d73-406f-d3da-08dce909f6ae\",\"Type\":4,\"CampaignType\":1,\"VendorId\":\"50cdf83c-82be-4031-a249-b7b675a0984c\",\"HowToUse\":null,\"Name\":\"Supreme Off [New Follower]\",\"Desc\":\"New follower offer of tara shine\",\"UseOfferImage\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/1afea8cd-28d8-4f55-9612-3a581a8a3a51\",\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/01e57c8a-7113-4287-8bb0-82a279b565ef\"],\"UseVendorHomeImage\":true,\"ImageUrls\":[\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/1afea8cd-28d8-4f55-9612-3a581a8a3a51\",\"https://bubltownstorageuat.blob.core.windows.net/bubl/Vendor/50cdf83c-82be-4031-a249-b7b675a0984c/Image/01e57c8a-7113-4287-8bb0-82a279b565ef\"],\"AboutOffer\":null,\"IndustryId\":null,\"OfferCategoy\":null,\"Keyword\":\"\",\"promotedCount\":null,\"IsPercentage\":true,\"IsJustOnePrice\":true,\"IsActive\":true,\"OfferDiscounts\":[{\"id\":\"891bd479-81be-470b-0895-08dce909f6af\",\"SequenceId\":0,\"Name\":\"deal 01\",\"IsPercentage\":true,\"Amount\":25,\"OriginalValue\":\"10\",\"MaxRedeemLimit\":0}],\"IsNewFollower\":true,\"MinSpendAmount\":null,\"IsOneTime\":false,\"ValidFromTime\":null,\"ValidToTime\":null,\"ApplicableDayList\":[],\"OfferMembershipSchemes\":[],\"AvailabilityRestriction\":false}'"
+			},
+			"response": []
+		}
+	]
+}
