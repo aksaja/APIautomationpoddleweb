@@ -1,0 +1,730 @@
+{
+	"info": {
+		"_postman_id": "2504df75-ee68-44a7-9973-8279b63fce08",
+		"name": "F: Promotion Center",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26111120",
+		"_collection_link": "https://winter-trinity-851878.postman.co/workspace/Poddle-business-Web-~2bb7aeee-71e2-4cb7-9720-ae5ca1ab3b23/collection/26111120-2504df75-ee68-44a7-9973-8279b63fce08?action=share&source=collection_link&creator=26111120"
+	},
+	"item": [
+		{
+			"name": "Promote My Retain & Grow Scheme",
+			"item": [
+				{
+					"name": "Promote Retain and Grow Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('status code is 200', () => {\r",
+									"    pm.response.to.have.status(200); })\r",
+									"\r",
+									"pm.test('Status code is not 500', () => {\r",
+									"    pm.response.to.not.have.status(500); })\r",
+									"\r",
+									"pm.test('Verify the Response Time', () => {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000); })\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=> \r",
+									"{ var jsonData = pm.response.json();\r",
+									"    pm.expect (jsonData.result.id).to.be.a (\"String\"); \r",
+									"    pm.expect (jsonData.result.channelId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.entityId).to.be.a (\"String\");\r",
+									"    pm.expect (jsonData.result.promoteTargetType).to.be.a (\"number\");\r",
+									"    pm.expect (jsonData.result.isActive).to.equal (true);\r",
+									"    pm.expect (jsonData.result.isStatsVisible).to.be.a (\"boolean\");\r",
+									"    pm.expect (jsonData.result.logs).to.be.an (\"array\");\r",
+									"\r",
+									"    for (var x=0 ; x<jsonData.result.logs.length ; x++)\r",
+									"    {   pm.expect (jsonData.result.logs[x].id).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.logs[x].promoteId).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.logs[x].socialMediaType).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.logs[x].socialMediaName).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.logs[x].deepLink).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.logs[x].clicksCount).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.logs[x].isActive).to.be.a (\"boolean\");\r",
+									"    }\r",
+									"\r",
+									"    pm.expect (jsonData.isError).to.equal (false);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MDI5MDAsImV4cCI6MTc2NjAzODkwMCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.SS7LeO0j5Z92_CDbnL3AHWaeMBA2stmVyfUEzWpSNGE"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{base_Url}}/api/Industry/v4/Promotes/get-promote-deeplink?ChannelId={{channel_id}}&PathType=14&EntityId=425018cc-ec31-4e68-6635-08dd1e8f4161&SocialEnabled=true&SocialTitle=&SocialDescription=&SocialImageLink=&referenceId=349b7842-c4a2-4cb1-abb4-25c48dc88c6e",
+							"host": [
+								"{{base_Url}}"
+							],
+							"path": [
+								"api",
+								"Industry",
+								"v4",
+								"Promotes",
+								"get-promote-deeplink"
+							],
+							"query": [
+								{
+									"key": "ChannelId",
+									"value": "{{channel_id}}"
+								},
+								{
+									"key": "PathType",
+									"value": "14"
+								},
+								{
+									"key": "EntityId",
+									"value": "425018cc-ec31-4e68-6635-08dd1e8f4161"
+								},
+								{
+									"key": "SocialEnabled",
+									"value": "true"
+								},
+								{
+									"key": "SocialTitle",
+									"value": ""
+								},
+								{
+									"key": "SocialDescription",
+									"value": ""
+								},
+								{
+									"key": "SocialImageLink",
+									"value": ""
+								},
+								{
+									"key": "referenceId",
+									"value": "349b7842-c4a2-4cb1-abb4-25c48dc88c6e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Promote my Campaign Deals",
+			"item": [
+				{
+					"name": "Campaign Deals List Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('status code is 200', () => {\r",
+									"    pm.response.to.have.status(200); })\r",
+									"\r",
+									"pm.test('Status code is not 500', () => {\r",
+									"    pm.response.to.not.have.status(500); })\r",
+									"\r",
+									"pm.test('Verify the Response Time', () => {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000); })\r",
+									"\r",
+									"pm.test (\"Result Validation\", ()=>\r",
+									"{ var jsonData = pm.response.json();\r",
+									"    for ( var y=0 ; y<jsonData.result.data.length ; y++)\r",
+									"     {  // pm.expect (jsonData.result.data[y].id).to.be.a (\"String\");\r",
+									"    //     pm.expect (jsonData.result.data[y].vendorId).to.be.a (\"String\");\r",
+									"    //     pm.expect (jsonData.result.data[y].name).to.be.a (\"String\");\r",
+									"    //     pm.expect (jsonData.result.data[y].desc).to.be.a (\"String\");\r",
+									"    //     pm.expect (jsonData.result.data[y].aboutOffer).to.be.a (\"String\");\r",
+									"    //     pm.expect (jsonData.result.data[y].isPercentage).to.be.a (\"boolean\");\r",
+									"    //     pm.expect (jsonData.result.data[y].amount).to.be.a (\"number\");\r",
+									"    //     pm.expect (jsonData.result.data[y].originalValue).to.be.a (\"number\");\r",
+									"        // pm.expect (jsonData.result.data[y].image).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.data[y].isActive).to.equal (true);\r",
+									"        pm.expect (jsonData.result.data[y].useVendorHomeImage).to.be.a (\"boolean\");\r",
+									"        pm.expect (jsonData.result.data[y].offerCode).to.be.a (\"String\");\r",
+									"        pm.expect (jsonData.result.data[y].views).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.data[y].shares).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.data[y].claims).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.data[y].redeem).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.data[y].purchased).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.data[y].unclaimed).to.be.a (\"number\");\r",
+									"        pm.expect (jsonData.result.data[y].isUpcommingOffer).to.be.a (\"boolean\");\r",
+									"        //pm.expect (jsonData.result.data[y].canBeDelete).to.be.a (\"boolean\");\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MDI5MDAsImV4cCI6MTc2NjAzODkwMCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.SS7LeO0j5Z92_CDbnL3AHWaeMBA2stmVyfUEzWpSNGE"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{base_Url}}/api/Catalog/v3.0/Offer?vendorId={{vendor_id}}&isActive=true&pageNumber=1&pageSize=5",
+							"host": [
+								"{{base_Url}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v3.0",
+								"Offer"
+							],
+							"query": [
+								{
+									"key": "vendorId",
+									"value": "{{vendor_id}}"
+								},
+								{
+									"key": "isActive",
+									"value": "true"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Offer Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var body = pm.response.json();\r",
+									"\r",
+									"pm.test(\"No error found\", function () {\r",
+									"pm.expect(body.isError).to.equal(false)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0OTcxMTMsImV4cCI6MTc2NjAzMzExMywiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.4hExdltvG4i0jaVdQe_-V478vNyzjT_57yYJjOC5mz4"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{base_Url}}/api/Catalog/v3.0/Offer?vendorId={{vendor_id}}&isActive=true&Searchtext=dea&pageNumber=1&pageSize=5",
+							"host": [
+								"{{base_Url}}"
+							],
+							"path": [
+								"api",
+								"Catalog",
+								"v3.0",
+								"Offer"
+							],
+							"query": [
+								{
+									"key": "vendorId",
+									"value": "{{vendor_id}}"
+								},
+								{
+									"key": "isActive",
+									"value": "true"
+								},
+								{
+									"key": "Searchtext",
+									"value": "dea"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Promote Offer Campaign Validation ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var body = pm.response.json();\r",
+									"pm.test(\"No error found\", function(){\r",
+									"    pm.expect(body.isError).to.be.false\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response validation\", function(){\r",
+									"    pm.expect(body.result.isActive).to.be.a('boolean');\r",
+									"    pm.expect(body.result.isStatsVisible).to.be.a('boolean');\r",
+									"\r",
+									"    for(var a = 0; a< body.result.length; a++) {\r",
+									"        pm.expect(body.result[a].promoteId).to.be.a('string');\r",
+									"        pm.expect(body.result[a].socialMediaName).to.be.a('string');\r",
+									"        pm.expect(body.result[a].socialMediaType).to.be.a('number');\r",
+									"        pm.expect(body.result[a].clicksCount).to.be.a('number')\r",
+									"        pm.expect(body.result[a].isActive).to.be('boolean')\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"//pm.environment.set(\"promote_offer_id\", body.result.entityId)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0OTcxMTMsImV4cCI6MTc2NjAzMzExMywiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.4hExdltvG4i0jaVdQe_-V478vNyzjT_57yYJjOC5mz4"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{base_Url}}/api/Industry/v4/Promotes/get-promote-deeplink?ChannelId={{channel_id}}&PathType=2&EntityId=4c919d0b-1d65-4135-aa83-319d0a6f9c25&SocialEnabled=true&SocialTitle=&SocialDescription=&SocialImageLink=&referenceId=349b7842-c4a2-4cb1-abb4-25c48dc88c6e",
+							"host": [
+								"{{base_Url}}"
+							],
+							"path": [
+								"api",
+								"Industry",
+								"v4",
+								"Promotes",
+								"get-promote-deeplink"
+							],
+							"query": [
+								{
+									"key": "ChannelId",
+									"value": "{{channel_id}}"
+								},
+								{
+									"key": "PathType",
+									"value": "2"
+								},
+								{
+									"key": "EntityId",
+									"value": "4c919d0b-1d65-4135-aa83-319d0a6f9c25"
+								},
+								{
+									"key": "SocialEnabled",
+									"value": "true"
+								},
+								{
+									"key": "SocialTitle",
+									"value": ""
+								},
+								{
+									"key": "SocialDescription",
+									"value": ""
+								},
+								{
+									"key": "SocialImageLink",
+									"value": ""
+								},
+								{
+									"key": "referenceId",
+									"value": "349b7842-c4a2-4cb1-abb4-25c48dc88c6e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Promote Everything",
+			"item": [
+				{
+					"name": "Promote Everything Validation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var body = pm.response.json();\r",
+									"pm.test(\"No error found\", function(){\r",
+									"    pm.expect(body.isError).to.be.false;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response validation of offer status\", function(){\r",
+									"    for(var a= 0; a<body.result.length; a++ ){\r",
+									"        pm.expect(body.result.isActive).to.be.a('boolean');\r",
+									"        pm.expect(body.result.socialMediaType).to.be.a('number');\r",
+									"        pm.expect(body.result.socialMediaName).to.be.a('string');\r",
+									"        pm.expect(body.result.clicksCount).to.be.a('number')\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "accept-language",
+								"value": "en-US,en;q=0.9"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MDI5MDAsImV4cCI6MTc2NjAzODkwMCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.SS7LeO0j5Z92_CDbnL3AHWaeMBA2stmVyfUEzWpSNGE"
+							},
+							{
+								"key": "origin",
+								"value": "https://business.poddleuat.demotown.co.uk"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://business.poddleuat.demotown.co.uk/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-site"
+							},
+							{
+								"key": "timezone",
+								"value": "+1"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+							}
+						],
+						"url": {
+							"raw": "{{base_Url}}/api/Industry/v4/Promotes/get-promote-deeplink?ChannelId={{channel_id}}&PathType=1&EntityId=349b7842-c4a2-4cb1-abb4-25c48dc88c6e&SocialEnabled=true&SocialTitle=&SocialDescription=&SocialImageLink=&referenceId=349b7842-c4a2-4cb1-abb4-25c48dc88c6e",
+							"host": [
+								"{{base_Url}}"
+							],
+							"path": [
+								"api",
+								"Industry",
+								"v4",
+								"Promotes",
+								"get-promote-deeplink"
+							],
+							"query": [
+								{
+									"key": "ChannelId",
+									"value": "{{channel_id}}"
+								},
+								{
+									"key": "PathType",
+									"value": "1"
+								},
+								{
+									"key": "EntityId",
+									"value": "349b7842-c4a2-4cb1-abb4-25c48dc88c6e"
+								},
+								{
+									"key": "SocialEnabled",
+									"value": "true"
+								},
+								{
+									"key": "SocialTitle",
+									"value": ""
+								},
+								{
+									"key": "SocialDescription",
+									"value": ""
+								},
+								{
+									"key": "SocialImageLink",
+									"value": ""
+								},
+								{
+									"key": "referenceId",
+									"value": "349b7842-c4a2-4cb1-abb4-25c48dc88c6e"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
