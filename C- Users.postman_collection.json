@@ -1,0 +1,1385 @@
+{
+	"info": {
+		"_postman_id": "5591912c-dacf-4106-9cb9-f8473dd327ae",
+		"name": "C: Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26111120",
+		"_collection_link": "https://winter-trinity-851878.postman.co/workspace/Poddle-business-Web-~2bb7aeee-71e2-4cb7-9720-ae5ca1ab3b23/collection/26111120-5591912c-dacf-4106-9cb9-f8473dd327ae?action=share&source=collection_link&creator=26111120"
+	},
+	"item": [
+		{
+			"name": "User List Validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{ var jsonData = pm.response.json();\r",
+							"    for (var x=0 ; x<jsonData.result.data.length ; x++)\r",
+							"    {\r",
+							"        pm.expect (jsonData.result.data[x].id).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].firstName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].lastName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].phoneNumber).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].email).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].isActive).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.data[x].vendorId).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].isBusinessBooster).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.data[x].isNFCTagEnabled).to.be.a (\"boolean\");\r",
+							"\r",
+							"         for (var y=0 ; y<jsonData.result.data[x].roles.length ; y++)\r",
+							"        {   pm.expect (jsonData.result.data[x].roles[y].id).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.result.data[x].roles[y].name).to.be.a (\"String\");\r",
+							"        }\r",
+							"        pm.expect (jsonData.isError).to.equal (false);\r",
+							"    }\r",
+							"})\r",
+							"\r",
+							"pm.test (\"Property Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"        for (var a=0 ; a<jsonData.result.data.length ; a++)\r",
+							"        {  \r",
+							"            var v_id = (jsonData.result.data[a].vendorId)\r",
+							"            var vendorid = pm.environment.get ('vendor_id')\r",
+							"            pm.expect (v_id).to.equal (vendorid);\r",
+							"        }\r",
+							"})\r",
+							"\r",
+							"pm.test (\"array Total Count Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"    var arraylen = jsonData.result.data.length ;\r",
+							"    var totalcount = jsonData.result.totalCount;\r",
+							"    pm.expect (arraylen).to.equal (totalcount);\r",
+							"})\r",
+							"\r",
+							"// pm.test (\"Booster count Validation\", ()=> \r",
+							"// {   var jsonData = pm.response.json();\r",
+							"//     var totalboostercount = jsonData.result.totalboostercount;\r",
+							"//         for (var b=0 ; b<jsonData.result.data.length ; b++)\r",
+							"//         {   var isBusinessBooster = jsonData.result.data[b].isBusinessBooster;\r",
+							"//             if (isBusinessBooster = true)\r",
+							"//             { var boostercount = 1\r",
+							"//             console.log (boostercount)}\r",
+							"//             // var totalcount = \r",
+							"//         }\r",
+							"// }) \r",
+							"\r",
+							"// total booster count \r",
+							"\r",
+							"// first name validation : Need to check after \r",
+							"// var f_name = (jsonData.result.data[a].firstName)\r",
+							"//             var firstName = pm.environment.get ('user_firstname')\r",
+							"//             let matchingindex = [];\r",
+							"//             for (let i = 0; i < f_name.length; i++)\r",
+							"//                 {\r",
+							"//                 if (f_name[i] === firstName) \r",
+							"//                 { matchingindex.push[i]; }\r",
+							"//                 }\r",
+							"\r",
+							"//                 if (matchingindex.length > 0) \r",
+							"//                 {console.log(`The value '${firstName}' exists at the following indices: ${matchingindex.join(\",\")}`);\r",
+							"//                 } else {console.log(`The value '${firstName}' does not exist in the array.`);} \r",
+							"\r",
+							"var body = pm.response.json();\r",
+							"for(var a = 0; a<body.result.length; a++)\r",
+							"pm.environment.set('user_Id', body.result.id)\r",
+							"\r",
+							"pm.test(\"No error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false   \r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWIyMzViNTgtNzdkZC00ODQ2LTg5M2ItYzQ4ZWNiYjQwMGQ2IiwiVXNlcklkIjoiYWIyMzViNTgtNzdkZC00ODQ2LTg5M2ItYzQ4ZWNiYjQwMGQ2IiwiRmlyc3ROYW1lIjoidGh1bGFzaCIsIkxhc3ROYW1lIjoiUyIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJkb2tpbWloOTczQGJpc2NvaW5lLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjUwY2RmODNjLTgyYmUtNDAzMS1hMjQ5LWI3YjY3NWEwOTg0YyIsIk9yaWdpbk5hbWUiOiJTcGEgQ2V5bG9uIC0gNTAiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCIzOGQ1OTIxMy0xMmYwLTQ3YjYtYjk0ZS0yOWZhNzA0ZWI5MzBcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCI1MGNkZjgzYy04MmJlLTQwMzEtYTI0OS1iN2I2NzVhMDk4NGNcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MjcxNTU4NjEsImV4cCI6MTc1ODY5MTg2MSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.Qjj5EBALySgNg8C4YWHCZ-rSWTIiU_JrmMw5NOHFcg0"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v1.1/VendorUser/GetAllVendorUsersForVendor?vendorId={{vendor_id}}&pageNumber=1&pageSize=6&searchText=",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v1.1",
+						"VendorUser",
+						"GetAllVendorUsersForVendor"
+					],
+					"query": [
+						{
+							"key": "vendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "6"
+						},
+						{
+							"key": "searchText",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Search Text Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"        for (var x=0 ; x<jsonData.result.data.length; x++)\r",
+							"        {\r",
+							"            let searchText1 = jsonData.result.data[x].firstName;\r",
+							"            let searchText2 = jsonData.result.data[x].lastName;\r",
+							"            pm.expect ((searchText1).includes ('Nirthika') || (searchText2).includes ('Nirthika'));\r",
+							"        }\r",
+							"})\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{ var jsonData = pm.response.json();\r",
+							"    for (var x=0 ; x<jsonData.result.data.length ; x++)\r",
+							"    {\r",
+							"        pm.expect (jsonData.result.data[x].id).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].firstName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].lastName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].phoneNumber).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].email).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].isActive).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.data[x].vendorId).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].isBusinessBooster).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.data[x].isNFCTagEnabled).to.be.a (\"boolean\");\r",
+							"\r",
+							"         for (var y=0 ; y<jsonData.result.data[x].roles.length ; y++)\r",
+							"        {\r",
+							"            pm.expect (jsonData.result.data[x].roles[y].id).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.result.data[x].roles[y].name).to.be.a (\"String\");\r",
+							"        }\r",
+							"    }\r",
+							"})\r",
+							"\r",
+							"\r",
+							"pm.test (\"Property Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"        for (var a=0 ; a<jsonData.result.data.length ; a++)\r",
+							"        {  \r",
+							"            var v_id = (jsonData.result.data[a].vendorId)\r",
+							"            var vendorid = pm.environment.get ('vendor_id')\r",
+							"            pm.expect (v_id).to.equal (vendorid);\r",
+							"\r",
+							"        }\r",
+							"})\r",
+							"\r",
+							"pm.test (\"array Total Count Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"    var arraylen = jsonData.result.data.length ;\r",
+							"    var totalcount = jsonData.result.totalCount;\r",
+							"    pm.expect (arraylen).to.equal (totalcount);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.owlocal.co.uk"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.owlocal.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v1.1/VendorUser/GetAllVendorUsersForVendor?vendorId=9cab46b1-6060-437a-84e3-34a02699b1ec&pageNumber=1&pageSize=6&searchText=Nirthika",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v1.1",
+						"VendorUser",
+						"GetAllVendorUsersForVendor"
+					],
+					"query": [
+						{
+							"key": "vendorId",
+							"value": "9cab46b1-6060-437a-84e3-34a02699b1ec"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "6"
+						},
+						{
+							"key": "searchText",
+							"value": "Nirthika"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{ var jsonData = pm.response.json();\r",
+							"        pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.firstName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.lastName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.phoneNumber).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.email).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.loginType).to.be.a (\"number\");\r",
+							"        pm.expect (jsonData.result.imageURL).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+							"\r",
+							"         for (var y=0 ; y<jsonData.result.roles.length ; y++)\r",
+							"        {\r",
+							"            pm.expect (jsonData.result.roles[y].id).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.result.roles[y].name).to.be.a (\"String\");\r",
+							"        }\r",
+							"\r",
+							"        pm.expect (jsonData.result.isBusinessBooster).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.isNFCTagEnabled).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.isError).to.equal (false);\r",
+							"    \r",
+							"})\r",
+							"\r",
+							"pm.test (\"Vendor Id Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"    var v_id = (jsonData.result.vendorId);\r",
+							"    var vendorid = pm.environment.get ('vendor_id');\r",
+							"    pm.expect (v_id).to.equal (vendorid);\r",
+							"})\r",
+							"\r",
+							"pm.test (\"isActive Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"    var requestbody = pm.request.body;\r",
+							"    var requestbodyJson = JSON.parse (requestbody);\r",
+							"    let isActiveresponse = (jsonData.result.isActive);\r",
+							"    let isActiverequest = requestbodyJson.isActive;\r",
+							"    pm.expect (isActiveresponse).to.equal (isActiverequest);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"d14fc100-c446-4452-8d32-ced80de15656\",\"vendorId\":\"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\"firstName\":\"durka\",\"lastName\":\"poddle\",\"loginType\":4,\"role\":\"8db31801-8dfe-4d22-bced-6bb7c8d720b6\",\"imageURL\":\"https://bublstorage.blob.core.windows.net/bubl/Marketing/no-profile-alt-min.png\",\"phoneNumber\":\"\",\"email\":\"thuriga3@gmail.com\",\"isActive\":true,\"isBusinessBooster\":true,\"isNFCEnabled\":true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_Url}}/api/Industry/v1.1/VendorUser"
+			},
+			"response": []
+		},
+		{
+			"name": "Logged in Business Booster Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"        pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.userId).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.deepLink).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.totalPoints).to.be.a (\"number\");\r",
+							"        pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.isNFCEnabled).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.isError).to.equal (false);\r",
+							"})\r",
+							"\r",
+							"pm.test (\"vandor id Validation\", ()=> \r",
+							"{   var jsonData = pm.response.json();\r",
+							"    var vidresponse = (jsonData.result.vendorId);\r",
+							"    var videnvironment = pm.environment.get ('vendor_id');\r",
+							"    pm.expect (vidresponse).to.equal (videnvironment);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v4/DataCapture/GetBusinessBooster?uid=d14fc100-c446-4452-8d32-ced80de15656",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v4",
+						"DataCapture",
+						"GetBusinessBooster"
+					],
+					"query": [
+						{
+							"key": "uid",
+							"value": "d14fc100-c446-4452-8d32-ced80de15656"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Business boosters validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{ var jsonData = pm.response.json();\r",
+							"        pm.expect (jsonData.result.totalBoostersCount).to.be.a (\"number\");\r",
+							"    for (var x=0 ; x<jsonData.result.data.length ; x++)\r",
+							"    {\r",
+							"        pm.expect (jsonData.result.data[x].id).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].firstName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].lastName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].phoneNumber).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].email).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].isActive).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.data[x].vendorId).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.data[x].isNFCTagEnabled).to.be.a (\"boolean\");\r",
+							"\r",
+							"        //This is the Business Booster Specific Test Case \r",
+							"        pm.expect (jsonData.result.data[x].isBusinessBooster).to.equal (true);\r",
+							"\r",
+							"         for (var y=0 ; y<jsonData.result.data[x].roles.length ; y++)\r",
+							"        {\r",
+							"            pm.expect (jsonData.result.data[x].roles[y].id).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.result.data[x].roles[y].name).to.be.a (\"String\");\r",
+							"        }\r",
+							"\r",
+							"        pm.expect (jsonData.isError).to.equal (false);\r",
+							"    }\r",
+							"})\r",
+							"\r",
+							"pm.test (\"Property Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"        for (var a=0 ; a<jsonData.result.data.length ; a++)\r",
+							"        {  \r",
+							"            var v_id = (jsonData.result.data[a].vendorId)\r",
+							"            var vendorid = pm.environment.get ('vendor_id')\r",
+							"            pm.expect (v_id).to.equal (vendorid);\r",
+							"\r",
+							"        }\r",
+							"})\r",
+							"\r",
+							"pm.test (\"array Total Count Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"    var arraylen = jsonData.result.data.length ;\r",
+							"    var totalcount = jsonData.result.totalCount;\r",
+							"    pm.expect (arraylen).to.equal (totalcount);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v1.1/VendorUser/GetAllVendorUsersForVendor?vendorId={{vendor_id}}&pageNumber=1&pageSize=6&searchText=&isBuinessBooster=true",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v1.1",
+						"VendorUser",
+						"GetAllVendorUsersForVendor"
+					],
+					"query": [
+						{
+							"key": "vendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "6"
+						},
+						{
+							"key": "searchText",
+							"value": ""
+						},
+						{
+							"key": "isBuinessBooster",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Already Registered Email Id Validation ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 400\", ()=> \r",
+							"{ pm.response.to.have.status (400); })\r",
+							"\r",
+							"pm.test (\"Status code is not 200\", ()=>\r",
+							"{pm.response.to.not.have.status (200);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{    var jsonData = pm.response.json();\r",
+							"        pm.expect (jsonData.result).to.be.empty;\r",
+							"        pm.expect (jsonData.isError).to.equal (true);\r",
+							"        pm.expect (jsonData.error.title).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.error.title).to.equal (\"Bad Request\");\r",
+							"        pm.expect (jsonData.error.detail).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.error.detail).to.equal (\"Request phone number or email already registered\");\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"d14fc100-c446-4452-8d32-ced80de15656\",\"vendorId\":\"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\"firstName\":\"durka\",\"lastName\":\"poddle\",\"loginType\":4,\"role\":\"8db31801-8dfe-4d22-bced-6bb7c8d720b6\",\"imageURL\":\"https://bublstorage.blob.core.windows.net/bubl/Marketing/no-profile-alt-min.png\",\"phoneNumber\":\"\",\"email\":\"thuriga3@gmail.com\",\"isActive\":true,\"isBusinessBooster\":true,\"isNFCEnabled\":true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_Url}}/api/Industry/v1.1/VendorUser"
+			},
+			"response": []
+		},
+		{
+			"name": "Roles Validation ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"        for ( var x=0 ; x<jsonData.result.length ; x++)\r",
+							"        {\r",
+							"            pm.expect (jsonData.result[x].roleId).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.result[x].roleName).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.result[x].description).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.result[x].originId).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.isError).to.equal (false);\r",
+							"        }\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1ODI2NjksImV4cCI6MTc2NjExODY2OSwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.cdgio3lknX9ISsAUx98pp9GOHj1-Cnq6j0biCA6WSlo"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_Url}}/api/Identity/Role/GetRoles?originId={{vendor_id}}",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Identity",
+						"Role",
+						"GetRoles"
+					],
+					"query": [
+						{
+							"key": "originId",
+							"value": "{{vendor_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor User creation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set ('vendor_user_id', jsonData.result.id);\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{   var jsonData = pm.response.json();\r",
+							"        pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.firstName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.lastName).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.phoneNumber).to.empty || (\"String\");\r",
+							"        pm.expect (jsonData.result.email).to.be.a (\"String\");\r",
+							"        pm.expect (jsonData.result.loginType).to.be.a (\"number\");\r",
+							"        pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.isBusinessBooster).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.result.isNFCTagEnabled).to.be.a (\"boolean\");\r",
+							"        pm.expect (jsonData.isError).to.equal (false);\r",
+							"\r",
+							"        for (var y=0 ; y<jsonData.result.roles.length; y++)\r",
+							"        {\r",
+							"            pm.expect (jsonData.result.roles[y].id).to.be.a (\"String\");\r",
+							"            pm.expect (jsonData.result.roles[y].name).to.equal (\"Super User\") || (jsonData.result.roles[y]).to.equal (\"Standard User\");\r",
+							"        }\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ0MjgxNzQsImV4cCI6MTc2NTk2NDE3NCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.u7uSIXTbNChDVU-1NVBS8hRQCH_gRqcW92zYh3c8Bjc"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":null,\"vendorId\":\"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\"firstName\":\"aksaja\",\"lastName\":\"durka\",\"loginType\":4,\"role\":\"8db31801-8dfe-4d22-bced-6bb7c8d720b6\",\"imageURL\":null,\"phoneNumber\":\"\",\"email\":\"aksaja5@gmail.com\",\"isActive\":true,\"isBusinessBooster\":true,\"isNFCEnabled\":true}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_Url}}/api/Industry/v1.1/VendorUser"
+			},
+			"response": []
+		},
+		{
+			"name": "Deeplink creation validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Result Validation\", ()=>\r",
+							"{ var jsonData = pm.response.json();\r",
+							"    pm.expect (jsonData.result.id).to.be.a (\"String\");\r",
+							"    pm.expect (jsonData.result.userId).to.be.a (\"String\");\r",
+							"    pm.expect (jsonData.result.vendorId).to.be.a (\"String\");\r",
+							"    pm.expect (jsonData.result.deepLink).to.be.a (\"String\");\r",
+							"    pm.expect (jsonData.result.totalPoints).to.be.a (\"number\");\r",
+							"    pm.expect (jsonData.result.shareCount).to.be.a (\"number\");\r",
+							"    pm.expect (jsonData.result.downloadCount).to.be.a (\"number\");\r",
+							"    pm.expect (jsonData.result.followCount).to.be.a (\"number\");\r",
+							"    pm.expect (jsonData.result.downloadPoints).to.be.a (\"number\");\r",
+							"    pm.expect (jsonData.result.followPoints).to.be.a (\"number\");\r",
+							"    pm.expect (jsonData.result.totalCounts).to.be.a (\"number\");\r",
+							"    pm.expect (jsonData.result.isActive).to.be.a (\"boolean\");\r",
+							"    pm.expect (jsonData.result.nfcTapCount).to.be.a (\"number\");\r",
+							"    pm.expect (jsonData.result.isNFCEnabled).to.be.a (\"boolean\");\r",
+							"    pm.expect (jsonData.isError).to.equal (false);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiVXNlcklkIjoiOGM2MTMyOGQtZmQ3NC00MTk4LWI2NjgtMzBkNmVmOGQwNjJjIiwiRmlyc3ROYW1lIjoiVGFyYSBzaGluZSIsIkxhc3ROYW1lIjoiTmlydGhpa2EiLCJMb2dpblR5cGUiOiJFbWFpbCIsIlVzZXJUeXBlIjoiVmVuZG9yIiwiQ2xpZW50SWQiOiI1NDJmYmZlMi04NDNiLTQxMGMtYWIxYS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiVmVuZG9yV2ViIiwiQ2xpZW50QXBwVHlwZSI6IldlYiIsIkxhbmd1YWdlIjoiZW4tR0IsIGVuLVVTOyBxPTAuOSwgZW47IHE9MC44IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJhc2hhbGVuaW4zNTUzQGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjljYWI0NmIxLTYwNjAtNDM3YS04NGUzLTM0YTAyNjk5YjFlYyIsIk9yaWdpbk5hbWUiOiJUYXJhIFNoaW5lIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiYWE2YjgyNjctMThlMi00YjY4LWFmZGUtODkzYjhlN2UzZDJlXCIsXCJSb2xlTmFtZVwiOlwiU3VwZXIgVXNlclwiLFwiT3JnaW5JZFwiOlwiOWNhYjQ2YjEtNjA2MC00MzdhLTg0ZTMtMzRhMDI2OTliMWVjXCJ9XSIsIm5iZiI6MTcxMzQzMjUyMCwiZXhwIjoxNzQ0OTY4NTIwLCJpc3MiOiJVQ0RQIiwiYXVkIjoiQnVibF91c2VycyJ9.D1f5hma1bpX0feW6d5oC7d525mzHnufh90FVtCWadK0"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.owlocal.co.uk"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.owlocal.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"{{vendor_user_id}}\",\r\n    \"vendorId\": \"{{vendor_id}}\",\r\n    \"channelId\": \"{{channel_id}}\"\r\n}"
+				},
+				"url": "{{base_Url}}/api/Industry/v4/DataCapture/CreateBusinessBoosterLink"
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor User Delete API [this is not in the poddle business web ]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> \r",
+							"{ pm.response.to.have.status (200); })\r",
+							"\r",
+							"pm.test (\"Status code is not 500\", ()=>\r",
+							"{pm.response.to.not.have.status (500);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiVXNlcklkIjoiYTVkZjViNzctMGE3Ni00NTZlLTg2YzEtNWEzZjU1YWJlNjNmIiwiRmlyc3ROYW1lIjoiSnVzdGluIiwiTGFzdE5hbWUiOiJBaml0aCIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJCdWJsIiwiQ2xpZW50SWQiOiJkYmIxYWU1Yy1mM2Y2LTQ1ZTgtYWIxOS0wOGQ4ZWRiOTQ0NDUiLCJDbGllbnROYW1lIjoiQWRtaW5XZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoiUG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJqdXN0aW5haml0aDA4QGdtYWlsLmNvbSIsIlR3b2ZhY3RvckVuYWJsZWQiOmZhbHNlLCJPcmlnaW5JZCI6IjBjNjU4ODRkLWM0MGQtNGFlMS1iZDQ3LTU4YTFiNGQzNTYwMSIsIk9yaWdpbk5hbWUiOiJidWJsIiwiVG9rZW5UeXBlIjoiTG9naW5Ub2tlbiIsIlYyIjoiVHJ1ZSIsIklzU3VwZXJVc2VyIjp0cnVlLCJSb2xlIjoiW3tcIlJvbGVJZFwiOlwiZjA2NGU0MzktNmY2OC00YWU4LWE0MmUtN2ViYTk3MjEzYjNkXCIsXCJSb2xlTmFtZVwiOlwiQnVibCBBZG1pblwiLFwiT3JnaW5JZFwiOlwiMGM2NTg4NGQtYzQwZC00YWUxLWJkNDctNThhMWI0ZDM1NjAxXCJ9XSIsIkxhbmd1YWdlRGV0YWlscyI6IntcIkxhbmd1YWdlSWRcIjpcIjgyYThjZjU2LWQ0ZTktNGQzMC05ZGIxLTA4ZGM1OTUyNzE1NFwiLFwiTGFuZ3VhZ2VOYW1lXCI6XCJFbmdsaXNoXCIsXCJMYW5ndWFnZUNvZGVcIjpcImVuLUdCXCJ9IiwibmJmIjoxNzEzNTIzNjYzLCJleHAiOjE3NDUwNTk2NjMsImlzcyI6IlVDRFAiLCJhdWQiOiJCdWJsX3VzZXJzIn0.87jRIUwazYh4iyMl74nEeGDJeGa8Dzc_KUzUEPB7sEs"
+					},
+					{
+						"key": "origin",
+						"value": "http://localhost:4200"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "http://localhost:4200/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Industry/v1.1/VendorUser/DeleteVendorUser?vendorUserId={{vendor_user_id}}",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Industry",
+						"v1.1",
+						"VendorUser",
+						"DeleteVendorUser"
+					],
+					"query": [
+						{
+							"key": "vendorUserId",
+							"value": "{{vendor_user_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
