@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "99357f4c-4adb-4b4d-847d-380f47e10c6c",
+		"name": "H: Messages",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26111120",
+		"_collection_link": "https://winter-trinity-851878.postman.co/workspace/Poddle-business-Web-~2bb7aeee-71e2-4cb7-9720-ae5ca1ab3b23/collection/26111120-99357f4c-4adb-4b4d-847d-380f47e10c6c?action=share&source=collection_link&creator=26111120"
+	},
+	"item": [
+		{
+			"name": "Get offer records",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"No error found\", function () {\r",
+							"    pm.expect(body.isError).to.equal(false)\r",
+							"    });\r",
+							"\r",
+							"pm.test(\"Results validation is success\", function () {\r",
+							"var offerRecords = body.result.data;\r",
+							"for (var i=0; i<offerRecords.length; i++) \r",
+							"    {\r",
+							"        pm.environment.set('offerID',offerRecords[0].id);\r",
+							"        pm.expect(offerRecords[i].id).to.be.a(\"string\").and.to.not.empty;\r",
+							"        pm.expect(offerRecords[i].vendorId).to.equal(pm.environment.get('vendor_id'));\r",
+							"        pm.expect(offerRecords[i].name).to.be.a(\"string\").and.to.not.empty;\r",
+							"        pm.expect(offerRecords[i].isActive).to.equal(true);\r",
+							"        pm.expect(offerRecords[i].claims).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(offerRecords[i].unclaimed).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(offerRecords[i].redeem).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(offerRecords[i].purchased).to.be.a(\"number\").and.to.not.null;\r",
+							"\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MDI5MDAsImV4cCI6MTc2NjAzODkwMCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.SS7LeO0j5Z92_CDbnL3AHWaeMBA2stmVyfUEzWpSNGE"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Catalog/v3.0/Offer?vendorId={{vendor_id}}&isActive=true&pageNumber=&pageSize=",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Catalog",
+						"v3.0",
+						"Offer"
+					],
+					"query": [
+						{
+							"key": "vendorId",
+							"value": "{{vendor_id}}"
+						},
+						{
+							"key": "isActive",
+							"value": "true"
+						},
+						{
+							"key": "pageNumber",
+							"value": ""
+						},
+						{
+							"key": "pageSize",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get broadcast history",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"No error found\", function () {\r",
+							"    pm.expect(body.isError).to.equal(false)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Results validation is success\", function () {\r",
+							"    var broadcastRecords = body.result.notifications;\r",
+							"    for (var i=0; i<broadcastRecords.length; i++) \r",
+							"    {\r",
+							"        pm.expect(broadcastRecords[i].id).to.be.a(\"string\").and.to.not.empty;\r",
+							"        pm.expect(broadcastRecords[i].createdDate).to.be.a(\"string\").and.to.not.empty;\r",
+							"        pm.expect(broadcastRecords[i].userType).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].isAllUsers).to.be.a(\"boolean\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].isCustomList).to.be.a(\"boolean\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].title).to.be.a(\"string\").and.to.not.empty;\r",
+							"        pm.expect(broadcastRecords[i].message).to.be.a(\"string\").and.to.not.empty;\r",
+							"        pm.expect(broadcastRecords[i].channelId).to.equal(pm.environment.get('channel_id'));\r",
+							"        pm.expect(broadcastRecords[i].isActive).to.be.a(\"boolean\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].pushNotificationType).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].target).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].sentCount).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].audience).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].notificationUniqueId).to.be.a(\"string\").and.to.not.empty;\r",
+							"        pm.expect(broadcastRecords[i].sentBy).to.be.a(\"string\").and.to.not.empty; \r",
+							"        pm.expect(broadcastRecords[i].entityId).to.equal(pm.environment.get('offerID'));\r",
+							"        pm.expect(broadcastRecords[i].referenceId).to.equal(pm.environment.get('vendor_id'));\r",
+							"        pm.expect(broadcastRecords[i].deliveredCount).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].clickedCount).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].successCount).to.be.a(\"number\").and.to.not.null;\r",
+							"        pm.expect(broadcastRecords[i].entityId).to.equal(pm.environment.get('vendor_user_id'));\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1NzkxNzMsImV4cCI6MTc2NjExNTE3MywiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.-H0cxywR7WwZcSrVszjyB_BPyFoVKPzWCh-4BCOyy4U"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{base_Url}}/api/Notification/v3.0/Notification/Get-Promotional-notification?channelId={{channel_id}}&searchText=&referenceId=349b7842-c4a2-4cb1-abb4-25c48dc88c6e&vendorUserId={{vendor_user_id}}&isBroadcastHistory=true",
+					"host": [
+						"{{base_Url}}"
+					],
+					"path": [
+						"api",
+						"Notification",
+						"v3.0",
+						"Notification",
+						"Get-Promotional-notification"
+					],
+					"query": [
+						{
+							"key": "channelId",
+							"value": "{{channel_id}}"
+						},
+						{
+							"key": "searchText",
+							"value": ""
+						},
+						{
+							"key": "referenceId",
+							"value": "349b7842-c4a2-4cb1-abb4-25c48dc88c6e"
+						},
+						{
+							"key": "vendorUserId",
+							"value": "{{vendor_user_id}}"
+						},
+						{
+							"key": "isBroadcastHistory",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send broadcast notification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"No error found\", function () {\r",
+							"    pm.expect(body.isError).to.equal(false)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiVXNlcklkIjoiZDE0ZmMxMDAtYzQ0Ni00NDUyLThkMzItY2VkODBkZTE1NjU2IiwiRmlyc3ROYW1lIjoiZHVya2EiLCJMYXN0TmFtZSI6InBvZGRsZSIsIkxvZ2luVHlwZSI6IkVtYWlsIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiTGFuZ3VhZ2UiOiJlbi1VUywgZW47IHE9MC45IiwiQ2hhbm5lbElkIjoiMmZkYTY5ZDctZWQ1MC00NjQwLThhMmItNzc3NGMwMTVlZWIwIiwiQ2hhbm5lbFR5cGUiOiJHcm91cCIsIkNoYW5uZWxOYW1lIjoicG9kZGxlIiwiUGhvbmVudW1iZXIiOiIiLCJQaG9uZW51bWJlclZlcmlmaWVkIjpmYWxzZSwiRW1haWwiOiJ0aHVyaWdhM0BnbWFpbC5jb20iLCJUd29mYWN0b3JFbmFibGVkIjpmYWxzZSwiT3JpZ2luSWQiOiIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmUiLCJPcmlnaW5OYW1lIjoiZmFuY3kgaG91c2UiLCJUb2tlblR5cGUiOiJMb2dpblRva2VuIiwiVjIiOiJUcnVlIiwiSXNTdXBlclVzZXIiOnRydWUsIlJvbGUiOiJbe1wiUm9sZUlkXCI6XCI4ZGIzMTgwMS04ZGZlLTRkMjItYmNlZC02YmI3YzhkNzIwYjZcIixcIlJvbGVOYW1lXCI6XCJTdXBlciBVc2VyXCIsXCJPcmdpbklkXCI6XCIzNDliNzg0Mi1jNGEyLTRjYjEtYWJiNC0yNWM0OGRjODhjNmVcIn1dIiwiTGFuZ3VhZ2VEZXRhaWxzIjoie1wiTGFuZ3VhZ2VJZFwiOlwiODJhOGNmNTYtZDRlOS00ZDMwLTlkYjEtMDhkYzU5NTI3MTU0XCIsXCJMYW5ndWFnZU5hbWVcIjpcIkVuZ2xpc2hcIixcIkxhbmd1YWdlQ29kZVwiOlwiZW4tR0JcIn0iLCJuYmYiOjE3MzQ1MDI5MDAsImV4cCI6MTc2NjAzODkwMCwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19tWTJITUNscXNUMjl2Q2pZMlVDenFhZmpyQm5wTFVjQzhUVjZyVjVybkVIQWVZcUtidyJ9.SS7LeO0j5Z92_CDbnL3AHWaeMBA2stmVyfUEzWpSNGE"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "timezone",
+						"value": "+1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Audience\":3,\"ChannelId\":\"2fda69d7-ed50-4640-8a2b-7774c015eeb0\",\"ReferenceId\":\"349b7842-c4a2-4cb1-abb4-25c48dc88c6e\",\"ReferenceName\":\"fancy house\",\"Category\":7,\"EntityId\":null,\"Title\":\"New message from fancy house\",\"Body\":\"New offers available for customers\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_Url}}/api/VendorAgg/Notification/PromotionalNotification"
+			},
+			"response": []
+		}
+	]
+}
