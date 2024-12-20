@@ -1,0 +1,637 @@
+{
+	"info": {
+		"_postman_id": "1db67256-0a8d-404a-a53f-423837819d34",
+		"name": "A: Sign In",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26111120",
+		"_collection_link": "https://winter-trinity-851878.postman.co/workspace/Poddle-business-Web-~2bb7aeee-71e2-4cb7-9720-ae5ca1ab3b23/collection/26111120-1db67256-0a8d-404a-a53f-423837819d34?action=share&source=collection_link&creator=26111120"
+	},
+	"item": [
+		{
+			"name": "Client Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 200\", ()=> { pm.response.to.have.status (404); })",
+							"",
+							"pm.test (\"Status code is not 500\", ()=> {pm.response.to.not.have.status (500);})",
+							"",
+							"pm.test (\"Verify the Response Time\", ()=> {pm.expect (pm.response.responseTime).to.be.below (3000);})",
+							"",
+							"var body = pm.response.text();",
+							"pm.environment.set('client_token', body.result.token);",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"VendorWeb\",\"secretKey\":\"aj_vendor_web\",\"channelId\":\"2FDA69D7-ED50-4640-8A2B-7774C015EEB0\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base_Url}}/api/Identity/Client/clientToken"
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Username with Valid Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 404\", ()=> \r",
+							"{ pm.response.to.have.status (404); })\r",
+							"\r",
+							"pm.test (\"Status code is not 200\", ()=>\r",
+							"{pm.response.to.not.have.status (200);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Response Validation\", ()=>\r",
+							"{ var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error.detail).to.be.a(\"String\");\r",
+							"    pm.expect(jsonData.isError).to.be.a (\"boolean\");\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8"
+					},
+					{
+						"key": "access-control-allow-origin",
+						"value": "*"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiVG9rZW5UeXBlIjoiQ2xpZW50QXBwVG9rZW4iLCJWMiI6IlRydWUiLCJuYmYiOjE3MTMyNTU4OTYsImV4cCI6MTc0NDc5MTg5NiwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19qVnB4Zm1KNlgwRUQyZWk5VlpDWjMwMGRHbEQ3UzVlWDl0WFZHdUFyRFprcGRNMmpmR2NIQUs4bjdJUTNvMzB0In0.I7Vo5lBKg3Opqy6avp6byM1LLnDinJzfkpVKfFJ6qZA"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddle.co.uk"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddle.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{invalid_username}}\",\r\n    \"password\": \"{{valid_password}}\",\r\n    \"loginType\": 4\r\n}"
+				},
+				"url": "{{baseUrl}}/api/Identity/Account/Login"
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Username with Invalid Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 400\", ()=> \r",
+							"{ pm.response.to.have.status (400 || 404); })\r",
+							"\r",
+							"pm.test (\"Status code is not 200\", ()=>\r",
+							"{pm.response.to.not.have.status (200);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Response Validation\", ()=>\r",
+							"{ var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error.detail).to.be.a(\"String\");\r",
+							"    pm.expect(jsonData.isError).to.be.a (\"boolean\");\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8"
+					},
+					{
+						"key": "access-control-allow-origin",
+						"value": "*"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiVG9rZW5UeXBlIjoiQ2xpZW50QXBwVG9rZW4iLCJWMiI6IlRydWUiLCJuYmYiOjE3MTMyNTU4OTYsImV4cCI6MTc0NDc5MTg5NiwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19qVnB4Zm1KNlgwRUQyZWk5VlpDWjMwMGRHbEQ3UzVlWDl0WFZHdUFyRFprcGRNMmpmR2NIQUs4bjdJUTNvMzB0In0.I7Vo5lBKg3Opqy6avp6byM1LLnDinJzfkpVKfFJ6qZA"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddle.co.uk"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddle.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{valid_username}}\",\r\n    \"password\": \"{{invalid_password}}\",\r\n    \"loginType\": 4\r\n}"
+				},
+				"url": "{{baseUrl}}/api/Identity/Account/Login"
+			},
+			"response": []
+		},
+		{
+			"name": "Valid Username and Valid Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is not 500\", function (){\r",
+							"  pm.response.to.not.have.status(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify the Response Time\", function (){\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"var body = pm.response.json();\r",
+							"\r",
+							"pm.test(\"no error found\", function(){\r",
+							"pm.expect(body.isError).to.be.false   \r",
+							"})\r",
+							"\r",
+							"pm.environment.set('token', body.result.token);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{client_token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-US,en;q=0.9"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddleuat.demotown.co.uk"
+					},
+					{
+						"key": "priority",
+						"value": "u=1, i"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddleuat.demotown.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"VendorWeb\",\"secretKey\":\"aj_vendor_web\",\"channelId\":\"2FDA69D7-ED50-4640-8A2B-7774C015EEB0\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://uat.api.demotown.co.uk/api/Identity/Client/clientToken"
+			},
+			"response": []
+		},
+		{
+			"name": "Empty Field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 500\", ()=> \r",
+							"{ pm.response.to.have.status (500); })\r",
+							"\r",
+							"pm.test (\"Status code is not 200\", ()=>\r",
+							"{pm.response.to.not.have.status (200);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{client_token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8"
+					},
+					{
+						"key": "access-control-allow-origin",
+						"value": "*"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiVG9rZW5UeXBlIjoiQ2xpZW50QXBwVG9rZW4iLCJWMiI6IlRydWUiLCJuYmYiOjE3MTMyNTU4OTYsImV4cCI6MTc0NDc5MTg5NiwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19qVnB4Zm1KNlgwRUQyZWk5VlpDWjMwMGRHbEQ3UzVlWDl0WFZHdUFyRFprcGRNMmpmR2NIQUs4bjdJUTNvMzB0In0.I7Vo5lBKg3Opqy6avp6byM1LLnDinJzfkpVKfFJ6qZA"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddle.co.uk"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddle.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"loginType\": 4\r\n}"
+				},
+				"url": "{{baseUrl}}/api/Identity/Account/Login"
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Username and Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test (\"status code is 404\", ()=> \r",
+							"{ pm.response.to.have.status (404); })\r",
+							"\r",
+							"pm.test (\"Status code is not 200\", ()=>\r",
+							"{pm.response.to.not.have.status (200);})\r",
+							"\r",
+							"pm.test (\"Verify the Response Time\", ()=>\r",
+							"{pm.expect (pm.response.responseTime).to.be.below (3000);})\r",
+							"\r",
+							"pm.test (\"Response Validation\", ()=>\r",
+							"{ var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error.detail).to.be.a(\"String\");\r",
+							"    pm.expect(jsonData.isError).to.be.a(\"boolean\");\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{client_token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8"
+					},
+					{
+						"key": "access-control-allow-origin",
+						"value": "*"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJDbGllbnRJZCI6IjU0MmZiZmUyLTg0M2ItNDEwYy1hYjFhLTA4ZDhlZGI5NDQ0NSIsIkNsaWVudE5hbWUiOiJWZW5kb3JXZWIiLCJDbGllbnRBcHBUeXBlIjoiV2ViIiwiVXNlclR5cGUiOiJWZW5kb3IiLCJDaGFubmVsSWQiOiIyZmRhNjlkNy1lZDUwLTQ2NDAtOGEyYi03Nzc0YzAxNWVlYjAiLCJDaGFubmVsVHlwZSI6Ikdyb3VwIiwiVG9rZW5UeXBlIjoiQ2xpZW50QXBwVG9rZW4iLCJWMiI6IlRydWUiLCJuYmYiOjE3MTMyNTU4OTYsImV4cCI6MTc0NDc5MTg5NiwiaXNzIjoiVW5pY29tIiwiYXVkIjoiQnVibF91c2Vyc19qVnB4Zm1KNlgwRUQyZWk5VlpDWjMwMGRHbEQ3UzVlWDl0WFZHdUFyRFprcGRNMmpmR2NIQUs4bjdJUTNvMzB0In0.I7Vo5lBKg3Opqy6avp6byM1LLnDinJzfkpVKfFJ6qZA"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"value": "https://business.poddle.co.uk"
+					},
+					{
+						"key": "referer",
+						"value": "https://business.poddle.co.uk/"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "cross-site"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{invalid_username}}\",\r\n    \"password\": \"{{invalid_password}}\",\r\n    \"loginType\": 4\r\n}"
+				},
+				"url": "{{baseUrl}}/api/Identity/Account/Login"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"\r",
+					"\r",
+					""
+				]
+			}
+		}
+	]
+}
